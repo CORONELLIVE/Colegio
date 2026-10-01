@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula Clara · Tutor Curricular Secundaria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMath()"></script>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#152036;--mute:#5b6b85;--line:#e2e8f4;--brand:#3742d1;--brand-hover:#2a33b0;--soft:#eceffe;--ok:#0d9488;--ok-bg:#e6fbf8;--err:#e11d48;--err-bg:#fff1f2;--stage:#080e1f;--holo:#38e1ff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden}
+header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.bar{max-width:1440px;margin:auto;padding:10px 20px;display:flex;align-items:center;gap:12px}
+.logo{width:36px;height:36px;border-radius:10px;background:var(--stage);color:var(--holo);display:grid;place-items:center;font-weight:700;font-size:1.1rem}
+.bar h1{font-size:1.02rem;font-weight:700;color:var(--ink)}.bar p{font-size:.76rem;color:var(--mute)}.sp{flex:1}
+main{max-width:1440px;margin:auto;padding:14px 20px 24px}
+.hide{display:none!important}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 2px 10px rgba(15,23,42,.03)}
+button{font-family:inherit;font-weight:600;font-size:.86rem;padding:9px 15px;border-radius:10px;border:1px solid transparent;cursor:pointer;transition:all .15s ease}
+button:disabled{opacity:.5;cursor:not-allowed}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.pri{background:var(--brand);color:#fff}.pri:hover:not(:disabled){background:var(--brand-hover)}
+.sec{background:#fff;border-color:var(--line);color:var(--ink)}.sec:hover:not(:disabled){background:#f6f8fc;border-color:#cfd7e6}
+.ok{background:var(--ok);color:#fff}.ok:hover:not(:disabled){background:#0b7a70}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:14px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;display:flex;flex-direction:column;gap:8px;text-align:left;font-weight:400;color:var(--ink);transition:all .2s ease}
+.tile:hover{border-color:var(--brand);box-shadow:0 8px 24px -10px rgba(58,68,214,.3);transform:translateY(-2px)}
+.tile b{font-size:1.02rem}.tile span{font-size:.85rem;color:var(--mute);line-height:1.45}
+.tile small{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);color:var(--brand);font-weight:600}
+.ico{width:40px;height:40px;border-radius:10px;background:var(--soft);display:grid;place-items:center;font-size:1.25rem}
+.tag{align-self:flex-start;background:var(--soft);color:var(--brand);font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:6px}
+.gen{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+input[type=text]{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;font-size:.92rem;background:#fff;color:var(--ink)}
+input[type=text]:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--soft)}
+
+/* AULA LAYOUT AJUSTADO A UNA SOLA PANTALLA Y MÁS ANCHO */
+.aula{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:stretch}
+.stage{background:radial-gradient(ellipse at 50% 15%,#14284f,var(--stage) 75%);color:#dff8ff;border-radius:18px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:0 8px 24px -8px rgba(8,14,31,.5);min-height:480px;justify-content:space-between}
+.stage-top{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
+.av{width:100%;max-width:220px;aspect-ratio:1}
+#av{width:100%;height:100%;display:block;overflow:visible}
+#av .ring{transform-box:fill-box;transform-origin:center;animation:avspin 70s linear infinite}
+@keyframes avspin{to{transform:rotate(360deg)}}
+.pill{display:flex;align-items:center;gap:8px;font-size:.8rem;background:rgba(255,255,255,.1);padding:5px 12px;border-radius:99px}
+.dot{width:8px;height:8px;border-radius:50%;background:#6b7a99}
+.dot.listening{background:#2ee6a6;box-shadow:0 0 0 4px rgba(46,230,166,.25)}
+.dot.speaking{background:var(--holo);box-shadow:0 0 0 4px rgba(56,225,255,.25)}
+.dot.thinking{background:#ffb84d;box-shadow:0 0 0 4px rgba(255,184,77,.25)}
+.q{font-size:.86rem;line-height:1.45;text-align:center;color:#cfe4ff;background:rgba(255,255,255,.05);padding:8px 10px;border-radius:10px;width:100%;border:1px solid rgba(255,255,255,.08)}
+.stage-actions{width:100%;display:flex;flex-direction:column;gap:8px}
+.stage .sec{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:#dff8ff;width:100%;font-size:.82rem;padding:8px 12px}
+.stage .mic-active{background:#0f9d8a!important;color:#fff!important;border-color:transparent!important;box-shadow:0 0 14px rgba(15,157,138,.45)}
+.stage .mic-disabled{background:rgba(244,63,94,.18)!important;color:#fecdd3!important;border-color:rgba(244,63,94,.35)!important}
+.btn-finish{background:#38e1ff!important;color:#041527!important;font-weight:700;width:100%;box-shadow:0 0 15px rgba(56,225,255,.4)}
+.hint-audio{font-size:.74rem;color:#8ba5cb;text-align:center;line-height:1.3}
+
+/* PANEL DERECHO: PESTAÑAS, LECTURA, DIÁLOGO Y CUESTIONARIO */
+.lesson{display:flex;flex-direction:column;gap:12px}
+.tabs-nav{display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:6px;flex-wrap:wrap;align-items:center}
+.tab-btn{background:transparent;border:1px solid transparent;color:var(--mute);padding:7px 14px;border-radius:8px;font-size:.86rem;font-weight:600;display:flex;align-items:center;gap:6px}
+.tab-btn:hover{color:var(--ink);background:var(--soft)}
+.tab-btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+.tab-badge{background:rgba(255,255,255,.2);font-size:.72rem;padding:2px 6px;border-radius:99px}
+
+.head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.head h2{font-size:1.15rem;font-weight:700}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+/* LIBRO DE LECTURA */
+.book{background:#fffdf7;border:1px solid #eadfc8;border-radius:14px;box-shadow:0 6px 20px -12px rgba(90,60,10,.25),inset 5px 0 0 #e9d9b4;padding:16px 22px 12px 24px;width:100%}
+#pgBody{min-height:180px}
+.pgtitle{font-size:1.15rem;font-weight:700;color:var(--brand);margin-bottom:8px}
+.pgtext{font-size:1.06rem;line-height:1.75;color:#22283a;white-space:pre-line}
+.pnav{display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:10px;border-top:1px dashed #e3d6b8}
+.pnav .mid{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.78rem;color:var(--mute)}
+.dots{display:flex;gap:5px}
+.dots button{width:8px;height:8px;padding:0;border-radius:50%;background:#d9cfb6;border:0}
+.dots button.on{background:var(--brand);transform:scale(1.25)}
+@keyframes pg{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
+.flip{animation:pg .25s ease}
+
+/* DIALOGO / CHAT Y AREA DE ESCRITURA MAS ARRIBA */
+.chat-container{display:flex;flex-direction:column;gap:8px}
+.chat{height:min(44vh,340px);overflow-y:auto;background:#f8fafd;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.chat.big{height:min(58vh,480px)}
+.b{max-width:88%;padding:8px 12px;border-radius:10px;font-size:.9rem;line-height:1.45}
+.b.bot{background:#fff;border:1px solid var(--line);border-left:3px solid var(--brand);color:var(--ink)}
+.b.me{background:var(--brand);color:#fff;align-self:flex-end}
+.input-panel{display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}
+.math-keys{display:flex;gap:5px;flex-wrap:wrap}
+.math-keys button{background:#f8fafd;border:1px solid var(--line);padding:3px 10px;border-radius:6px;font-size:.84rem;color:var(--ink);cursor:pointer}
+.math-keys button:hover{background:var(--soft);border-color:var(--brand)}
+.input-row{display:flex;gap:8px;align-items:center}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{background:var(--soft);color:var(--brand);border:1px solid #d5d9fb;font-size:.8rem;padding:5px 10px;border-radius:99px;cursor:pointer}
+.chip:hover{background:#dfe4fc}
+
+/* CUESTIONARIO CON PUNTAJE Y REFUERZO */
+.quiz-panel{display:flex;flex-direction:column;gap:14px;max-height:min(68vh,520px);overflow-y:auto;padding-right:4px}
+.quiz-score-card{background:linear-gradient(135deg,#eceffe,#e0f2fe);border:1px solid #bfdbfe;border-radius:12px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.score-main{display:flex;align-items:baseline;gap:8px}
+.score-num{font-size:1.8rem;font-weight:800;color:var(--brand)}
+.score-label{font-size:.88rem;font-weight:600;color:var(--ink)}
+.score-sub{font-size:.78rem;color:var(--mute)}
+.q-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:all .15s ease}
+.q-card.is-correct{border-color:var(--ok);background:var(--ok-bg)}
+.q-card.is-wrong{border-color:var(--err);background:var(--err-bg)}
+.q-title{font-size:.95rem;font-weight:700;color:var(--ink)}
+.q-options{display:grid;grid-template-columns:1fr;gap:6px}
+.q-opt{display:flex;align-items:center;gap:10px;background:#f8fafd;border:1px solid var(--line);padding:9px 12px;border-radius:8px;cursor:pointer;font-size:.88rem;text-align:left;transition:all .15s ease;color:var(--ink)}
+.q-opt:hover:not(:disabled){border-color:var(--brand);background:#fff}
+.q-opt.selected{border-color:var(--brand);background:var(--soft);font-weight:600}
+.q-opt.correct-opt{border-color:var(--ok)!important;background:#d1fae5!important;font-weight:700;color:#065f46}
+.q-opt.wrong-opt{border-color:var(--err)!important;background:#ffe4e6!important;color:#9f1239;text-decoration:line-through}
+.q-feedback{font-size:.84rem;padding:8px 10px;border-radius:6px;background:rgba(255,255,255,.8);line-height:1.4}
+.refuerzo-box{background:linear-gradient(135deg,#fff8eb,#fef3c7);border:1px solid #fde68a;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.refuerzo-box b{color:#92400e;display:flex;align-items:center;gap:6px;font-size:.92rem}
+.refuerzo-box p{color:#78350f;font-size:.88rem;line-height:1.5}
+
+.word{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-top:6px}
+.sy{display:inline-block;background:#fff1f2;border:1px solid #fecdd3;color:#e11d48;font-weight:700;padding:2px 8px;border-radius:6px;margin-right:4px;font-size:.84rem}
+.msg{font-size:.84rem;color:var(--err);margin-top:6px;min-height:1em}
+.note{font-size:.8rem;color:var(--mute);margin-top:4px}
+.tile.free{background:linear-gradient(135deg,#eceefe,#e6fbff);border-color:#bfe9f5}
+.tile.care{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#86efac}
+
+@media(max-width:960px){
+  .aula{grid-template-columns:1fr}
+  .stage{min-height:auto}
+  .chat{height:260px}
+}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <div class="logo">C</div>
+  <div><h1>Aula Clara</h1><p>Tutor curricular · Secundaria Perú</p></div>
+  <div class="sp"></div>
+  <button id="back" class="sec hide">← Volver</button>
+</div></header>
+
+<main>
+  <!-- HUB PRINCIPAL -->
+  <section id="vHub"><div class="grid" id="hubGrid"></div></section>
+
+  <!-- LISTA DE TEMAS DEL CURSO -->
+  <section id="vTemas" class="hide"><div class="card">
+    <h2 id="cTitulo"></h2><p id="cDesc" style="color:var(--mute);font-size:.88rem;margin-top:2px"></p>
+    <div class="gen">
+      <input type="text" id="nuevoTema" placeholder="Tema para generar con IA (opcional)" aria-label="Tema para generar con IA">
+      <button id="btnGen" class="pri">Generar lección con IA</button>
+    </div>
+    <div class="msg" id="msgGen" role="status"></div>
+    <div class="grid" id="topGrid"></div>
+  </div></section>
+
+  <!-- AULA INTERACTIVA -->
+  <section id="vAula" class="hide"><div class="aula">
+    
+    <!-- COLUMNA IZQUIERDA: AVATAR DE CLARA Y ESTADO DE AUDIO -->
+    <aside class="stage">
+      <div class="stage-top">
+        <div class="av"><svg id="av" viewBox="0 0 400 400" role="img" aria-label="Profesora Clara" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <radialGradient id="gGlow" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#38e1ff" stop-opacity=".24"/><stop offset="1" stop-color="#38e1ff" stop-opacity="0"/></radialGradient>
+  <radialGradient id="gSkin" cx="42%" cy="38%" r="75%"><stop offset="0" stop-color="#ffdcc2"/><stop offset=".65" stop-color="#f4b995"/><stop offset="1" stop-color="#e59f7c"/></radialGradient>
+  <linearGradient id="gHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#85523b"/><stop offset="1" stop-color="#4a2718"/></linearGradient>
+  <linearGradient id="gHairBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5e3625"/><stop offset="1" stop-color="#37190f"/></linearGradient>
+  <linearGradient id="gShirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5aa47b"/><stop offset="1" stop-color="#3a7654"/></linearGradient>
+  <linearGradient id="gSilk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#e4d9c6"/></linearGradient>
+  <linearGradient id="gSatin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#30303b"/><stop offset="1" stop-color="#0f0f14"/></linearGradient>
+  <radialGradient id="gIris" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#b98050"/><stop offset=".55" stop-color="#7a4a2c"/><stop offset="1" stop-color="#3f2313"/></radialGradient>
+  <clipPath id="ecL"><circle cx="163" cy="175" r="21"/></clipPath>
+  <clipPath id="ecR"><circle cx="237" cy="175" r="21"/></clipPath>
+  <clipPath id="mClip"><path id="mClipP" d=""/></clipPath>
+  <g id="braidShape">
+    <path d="M-14 -4 C-18 40 -16 100 -12 150 L12 150 C16 100 18 40 14 -4 Z" fill="#5a3322"/>
+    <ellipse cx="-3" cy="14" rx="15" ry="14" fill="url(#gHair)" stroke="#3a1e12" stroke-width="1.2"/>
+    <ellipse cx="4" cy="38" rx="15" ry="14" fill="url(#gHair)" stroke="#3a1e12" stroke-width="1.2"/>
+    <ellipse cx="-3" cy="62" rx="15" ry="14" fill="url(#gHair)" stroke="#3a1e12" stroke-width="1.2"/>
+    <ellipse cx="4" cy="86" rx="15" ry="14" fill="url(#gHair)" stroke="#3a1e12" stroke-width="1.2"/>
+    <ellipse cx="-3" cy="110" rx="15" ry="14" fill="url(#gHair)" stroke="#3a1e12" stroke-width="1.2"/>
+    <ellipse cx="3" cy="132" rx="14" ry="13" fill="url(#gHair)" stroke="#3a1e12" stroke-width="1.2"/>
+    <path d="M-9 8 Q-4 16 -9 24 M-2 32 Q3 40 -2 48 M-9 56 Q-4 64 -9 72 M-2 80 Q3 88 -2 96" fill="none" stroke="#c48a68" stroke-width="2" stroke-linecap="round" opacity=".35"/>
+    <ellipse cx="0" cy="146" rx="13" ry="5.5" fill="#ea8a3f" stroke="#b96a2a" stroke-width="1"/>
+    <path d="M-9 148 Q0 182 9 148 Z" fill="url(#gHair)" stroke="#3a1e12" stroke-width="1.2"/>
+  </g>
+</defs>
+
+<circle cx="200" cy="205" r="200" fill="url(#gGlow)"/>
+<circle class="ring" cx="200" cy="200" r="193" fill="none" stroke="rgba(56,225,255,.18)" stroke-width="1.2" stroke-dasharray="6 10"/>
+
+<g id="cBody">
+  <path d="M184 236 L184 270 C184 285 178 292 178 300 L178 312 L222 312 L222 300 C222 292 216 285 216 270 L216 236 Z" fill="#eeb08c"/>
+  <ellipse cx="200" cy="266" rx="16" ry="11" fill="rgba(150,75,45,.32)"/>
+  <path d="M96 400 C98 358 118 332 154 319 C170 313 176 300 180 290 Q200 324 220 290 C224 300 230 313 246 319 C282 332 302 358 304 400 Z" fill="url(#gShirt)" stroke="#2f6b4b" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M180 290 Q200 324 220 290 L236 400 L164 400 Z" fill="#ea8a3f"/>
+  <path d="M180 290 Q200 324 220 290" fill="none" stroke="#c46f2c" stroke-width="2"/>
+  <path d="M150 310 L180 288 L194 334 L162 324 Z" fill="#66b189" stroke="#2f6b4b" stroke-width="1.3" stroke-linejoin="round"/>
+  <path d="M250 310 L220 288 L206 334 L238 324 Z" fill="#66b189" stroke="#2f6b4b" stroke-width="1.3" stroke-linejoin="round"/>
+  <path d="M110 350 Q104 375 102 400" fill="none" stroke="rgba(0,0,0,.14)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="150" cy="372" r="3.2" fill="#e9f5ee" stroke="#2f6b4b" stroke-width="1"/>
+  <circle cx="150" cy="392" r="3.2" fill="#e9f5ee" stroke="#2f6b4b" stroke-width="1"/>
+</g>
+
+<g id="cBraidL"><use href="#braidShape"/></g>
+<g id="cBraidR"><use href="#braidShape"/></g>
+
+<g id="cArm" transform="translate(256 332)" opacity="0">
+  <rect x="-14" y="-16" width="28" height="68" rx="14" fill="url(#gShirt)" stroke="#2f6b4b" stroke-width="1.5"/>
+  <g id="cFore" transform="translate(0 50)">
+    <rect x="-12" y="-14" width="24" height="74" rx="12" fill="url(#gShirt)" stroke="#2f6b4b" stroke-width="1.5"/>
+    <rect x="-14" y="46" width="28" height="11" rx="5" fill="#2f6b4b"/>
+    <g id="cHand" transform="translate(0 58)">
+      <rect x="-11.5" y="16" width="5.2" height="20" rx="2.6" fill="#f2b894" stroke="#d08a68" stroke-width="1"/>
+      <rect x="-5.5" y="16" width="5.2" height="25" rx="2.6" fill="#f2b894" stroke="#d08a68" stroke-width="1"/>
+      <rect x="0.5" y="16" width="5.2" height="23" rx="2.6" fill="#f2b894" stroke="#d08a68" stroke-width="1"/>
+      <rect x="6.5" y="16" width="5" height="18" rx="2.5" fill="#f2b894" stroke="#d08a68" stroke-width="1"/>
+      <rect x="-12" y="-4" width="24" height="30" rx="11" fill="#f2b894" stroke="#d08a68" stroke-width="1.2"/>
+      <ellipse cx="14" cy="14" rx="4.6" ry="10" transform="rotate(-28 14 14)" fill="#f2b894" stroke="#d08a68" stroke-width="1"/>
+    </g>
+  </g>
+</g>
+
+<g id="cHead">
+  <path d="M108 190 C92 100 130 44 200 42 C270 44 308 100 292 190 C292 232 270 252 250 252 L150 252 C130 252 108 232 108 190 Z" fill="url(#gHairBack)"/>
+  <ellipse cx="118" cy="182" rx="9" ry="14" fill="#eeb08c"/>
+  <ellipse cx="282" cy="182" rx="9" ry="14" fill="#eeb08c"/>
+  <path d="M200 92 C250 92 284 128 283 176 C282 222 250 258 200 259 C150 258 118 222 117 176 C116 128 150 92 200 92 Z" fill="url(#gSkin)"/>
+  <ellipse id="blushL" cx="146" cy="208" rx="15" ry="8" fill="#ff8f9c" opacity=".25"/>
+  <ellipse id="blushR" cx="254" cy="208" rx="15" ry="8" fill="#ff8f9c" opacity=".25"/>
+  <path d="M196 203 Q200 208 204 203" fill="none" stroke="#d08a68" stroke-width="2.4" stroke-linecap="round" opacity=".85"/>
+  <ellipse cx="199" cy="199" rx="2.6" ry="1.8" fill="#fff" opacity=".35"/>
+
+  <g id="eyeL" clip-path="url(#ecL)">
+    <circle cx="163" cy="175" r="21" fill="#fffaf6"/>
+    <g id="irisL">
+      <circle cx="163" cy="176" r="14" fill="url(#gIris)"/>
+      <circle cx="163" cy="176" r="7" fill="#170d08"/>
+      <circle cx="158" cy="171" r="4" fill="#fff"/>
+      <circle cx="168" cy="181" r="2" fill="#fff" opacity=".9"/>
+    </g>
+    <path id="llidL" fill="#f2b894"/>
+    <path id="lidL" fill="#f2b894"/>
+    <path id="lashL" fill="none" stroke="#3b2116" stroke-width="2.8" stroke-linecap="round"/>
+  </g>
+  <g id="eyeR" clip-path="url(#ecR)">
+    <circle cx="237" cy="175" r="21" fill="#fffaf6"/>
+    <g id="irisR">
+      <circle cx="237" cy="176" r="14" fill="url(#gIris)"/>
+      <circle cx="237" cy="176" r="7" fill="#170d08"/>
+      <circle cx="232" cy="171" r="4" fill="#fff"/>
+      <circle cx="242" cy="181" r="2" fill="#fff" opacity=".9"/>
+    </g>
+    <path id="llidR" fill="#f2b894"/>
+    <path id="lidR" fill="#f2b894"/>
+    <path id="lashR" fill="none" stroke="#3b2116" stroke-width="2.8" stroke-linecap="round"/>
+  </g>
+  <path d="M141 168 Q136 166 133 160 M259 168 Q264 166 267 160" fill="none" stroke="#3b2116" stroke-width="2.4" stroke-linecap="round"/>
+
+  <g id="glasses" fill="none" stroke="#08080b" stroke-linecap="round" stroke-linejoin="round">
+    <g id="frameL">
+      <path d="M131 156 C141 148 157 146 172 149 C186 152 196 156 196 168 C196 187 189 202 170 202 C150 202 134 194 132 176 C131 169 130 162 131 156 Z" fill="rgba(210,235,255,.10)" stroke-width="3.4"/>
+      <path d="M131 156 C141 148 157 146 172 149 C186 152 196 156 196 168" stroke-width="6.2"/>
+      <path d="M131 158 L119 152" stroke-width="3.2"/>
+    </g>
+    <use href="#frameL" transform="translate(400 0) scale(-1 1)"/>
+    <path d="M195 166 Q200 161 205 166" stroke-width="3.4"/>
+  </g>
+  <path d="M141 158 Q149 152 161 151 M259 158 Q251 152 239 151" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".5"/>
+  <g id="tears" opacity="0" fill="none" stroke-linecap="round">
+    <path d="M144 196 Q163 208 184 197 M256 196 Q237 208 216 197" stroke="#bfe8ff" stroke-width="4.5" opacity=".75"/>
+    <path d="M156 204 C152 216 156 228 158 242 M172 206 C174 220 171 236 170 250 M244 204 C248 216 244 228 242 242 M228 206 C226 220 229 236 230 250" stroke="#a9defa" stroke-width="5.5" opacity=".6"/>
+    <path d="M155 206 C152 216 155 226 156 236 M245 206 C248 216 245 226 244 236" stroke="#fff" stroke-width="1.6" opacity=".7"/>
+  </g>
+  <g id="drops"></g>
+
+  <path id="browL" fill="none" stroke="#4a2718" stroke-width="4.2" stroke-linecap="round"/>
+  <path id="browR" fill="none" stroke="#4a2718" stroke-width="4.2" stroke-linecap="round"/>
+
+  <path id="mFill" fill="#e08a84"/>
+  <path id="mIn" fill="#5b1a22"/>
+  <g clip-path="url(#mClip)">
+    <rect id="mTeeth" fill="#fffaf4" opacity="0"/>
+    <ellipse id="mTongue" fill="#d8646f" opacity="0"/>
+  </g>
+  <path id="mLine" fill="none" stroke="#b8534f" stroke-width="2.2" stroke-linejoin="round"/>
+
+  <path d="M114 184 C100 118 136 60 200 58 C264 60 300 118 286 184 C284 156 274 132 252 118 C232 106 208 104 198 116 C184 106 158 108 140 122 C126 136 120 158 114 184 Z" fill="url(#gHair)"/>
+  <path d="M150 92 C175 72 215 70 246 88" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".16"/>
+  <path d="M198 116 C190 94 170 86 150 94 M252 118 C264 104 272 92 274 80" fill="none" stroke="#3a1e12" stroke-width="2" stroke-linecap="round" opacity=".35"/>
+
+  <g id="headset">
+    <path d="M106 178 C100 84 148 34 200 34 C252 34 300 84 294 178" fill="none" stroke="#2b2b31" stroke-width="9" stroke-linecap="round"/>
+    <path d="M114 140 C113 92 150 46 200 45" fill="none" stroke="#9a9aa5" stroke-width="2" stroke-linecap="round" opacity=".35"/>
+    <rect x="90" y="154" width="34" height="60" rx="16" fill="#3b3b43" stroke="#1d1d22" stroke-width="1.5"/>
+    <rect x="117" y="160" width="11" height="48" rx="5.5" fill="#b07a4d"/>
+    <path d="M98 168 Q97 184 100 198" fill="none" stroke="#7a7a86" stroke-width="2.4" stroke-linecap="round" opacity=".6"/>
+    <rect x="276" y="154" width="34" height="60" rx="16" fill="#3b3b43" stroke="#1d1d22" stroke-width="1.5"/>
+    <rect x="272" y="160" width="11" height="48" rx="5.5" fill="#b07a4d"/>
+    <path d="M302 168 Q303 184 300 198" fill="none" stroke="#7a7a86" stroke-width="2.4" stroke-linecap="round" opacity=".6"/>
+    <path d="M296 206 C300 246 268 268 238 254" fill="none" stroke="#2c2c33" stroke-width="3.8" stroke-linecap="round"/>
+    <ellipse cx="234" cy="252" rx="9" ry="5.5" transform="rotate(-25 234 252)" fill="#27272d" stroke="#111" stroke-width="1"/>
+    <ellipse cx="231" cy="250" rx="3" ry="1.6" transform="rotate(-25 231 250)" fill="#8a8a96" opacity=".6"/>
+  </g>
+</g>
+
+<g id="sparks"></g>
+<g id="hearts"></g>
+</svg></div>
+        <div class="pill"><span id="dot" class="dot"></span><span id="lbl" role="status">Lista</span></div>
+        <div class="q" id="banner">Bienvenido a Aula Clara</div>
+      </div>
+      <div class="stage-actions">
+        <button id="btnFinishNow" class="btn-finish hide">⚡ Enviar respuesta hablada</button>
+        <button id="btnMic" class="sec mic-disabled">🔇 Micrófono: APAGADO</button>
+        <p class="hint-audio">Activa el micrófono para responder con voz o usa el chat.</p>
+      </div>
+    </aside>
+
+    <!-- COLUMNA DERECHA: PESTAÑAS Y CONTENIDOS -->
+    <div class="lesson">
+      <div class="card" id="cardContenido">
+        
+        <!-- PESTAÑAS SUPERIORES -->
+        <div class="tabs-nav" id="aulaTabs">
+          <button class="tab-btn active" id="tabLibroBtn" onclick="switchAulaTab('libro')">📖 Lectura de la clase</button>
+          <button class="tab-btn" id="tabDialogoBtn" onclick="switchAulaTab('dialogo')">💬 Diálogo interactivo</button>
+          <button class="tab-btn" id="tabQuizBtn" onclick="switchAulaTab('quiz')">📝 Cuestionario final <span class="tab-badge" id="quizBadge">Evaluación</span></button>
+        </div>
+
+        <div id="libreHead" class="hide" style="margin-bottom:10px">
+          <span class="tag" id="tagLibre">Modo libre</span>
+          <h2 id="hLibre" style="font-size:1.15rem;margin-top:4px">Conversa con Clara</h2>
+          <p id="pLibre" style="color:var(--mute);font-size:.84rem">Pregunta lo que quieras aprender. Clara solo conversa de temas educativos.</p>
+        </div>
+
+        <!-- SECCIÓN 1: LECTURA DEL LIBRO -->
+        <div id="secLibro">
+          <div class="head">
+            <div><span class="tag" id="lArea"></span><h2 id="lTitulo"></h2></div>
+            <div class="row">
+              <button id="btnLeer" class="sec">▶ Escuchar clase</button>
+              <button id="btnQuiz" class="ok">Iniciar diálogo guiado →</button>
+            </div>
+          </div>
+          <div class="book" id="book">
+            <div id="pgBody">
+              <div class="pgtitle" id="pgTitulo"></div>
+              <div class="pgtext" id="pgTexto"></div>
+            </div>
+            <div class="pnav">
+              <button id="pgPrev" class="sec">← Anterior</button>
+              <div class="mid"><div class="dots" id="pgDots"></div><span id="pgNum"></span></div>
+              <button id="pgNext" class="pri">Siguiente →</button>
+            </div>
+          </div>
+          <div class="note" id="ampNote" role="status"></div>
+          <div id="silabeo"></div>
+        </div>
+
+        <!-- SECCIÓN 2: DIÁLOGO / CHAT (MÁS ARRIBA Y ANCHO) -->
+        <div id="secDialogo" class="hide">
+          <div class="chat-container">
+            <div class="chat" id="chat" aria-live="polite"></div>
+            <div class="chips" id="chips"></div>
+            
+            <!-- PANEL DE ENTRADA POSICIONADO ARRIBA / DIRECTAMENTE BAJO EL CHAT -->
+            <div class="input-panel">
+              <div class="math-keys hide" id="mathKeys">
+                <button onclick="addTxt('√')">√</button>
+                <button onclick="addTxt('^')">^</button>
+                <button onclick="addTxt('²')">²</button>
+                <button onclick="addTxt('³')">³</button>
+                <button onclick="addTxt('/')">/</button>
+                <button onclick="addTxt('±')">±</button>
+                <button onclick="addTxt('π')">π</button>
+                <button onclick="addTxt('=')">=</button>
+                <button onclick="addTxt('+')">+</button>
+                <button onclick="addTxt('-')">-</button>
+                <button onclick="addTxt('x')">x</button>
+                <button onclick="addTxt('y')">y</button>
+              </div>
+              <div class="input-row">
+                <input type="text" id="txt" placeholder="Escribe tu respuesta o duda aquí..." aria-label="Tu respuesta">
+                <button id="btnEnv" class="pri">Enviar ↵</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECCIÓN 3: CUESTIONARIO FINAL CON PUNTAJE Y REFUERZO -->
+        <div id="secQuiz" class="hide">
+          <div class="quiz-panel" id="quizContainer">
+            <div class="head">
+              <div>
+                <span class="tag">Evaluación Formativa</span>
+                <h2 style="margin-top:4px">Cuestionario de Comprobación</h2>
+                <p style="color:var(--mute);font-size:.84rem">Responde las preguntas para evaluar lo aprendido y recibir retroalimentación personalizada.</p>
+              </div>
+              <button id="btnGenerarQuiz" class="sec" onclick="cargarCuestionario(true)">🔄 Regenerar preguntas</button>
+            </div>
+
+            <!-- RESULTADOS Y PUNTAJE -->
+            <div id="quizResultBox" class="hide">
+              <div class="quiz-score-card">
+                <div class="score-main">
+                  <span class="score-num" id="scoreValue">--/20</span>
+                  <div>
+                    <div class="score-label" id="scoreMsg">Puntaje obtenido</div>
+                    <div class="score-sub" id="scoreDetail">0 de 0 correctas</div>
+                  </div>
+                </div>
+                <button class="pri" onclick="reiniciarQuiz()">Volver a intentar 🔁</button>
+              </div>
+
+              <!-- REFUERZO DE LA PROFESORA CLARA -->
+              <div id="refuerzoBox" class="refuerzo-box hide">
+                <b>👩‍🏫 Refuerzo pedagógico de la Profesora Clara:</b>
+                <p id="refuerzoTexto"></p>
+              </div>
+            </div>
+
+            <!-- LISTA DE PREGUNTAS -->
+            <div id="quizQuestionsList" style="display:flex;flex-direction:column;gap:12px"></div>
+
+            <div id="quizActions" style="display:flex;justify-content:flex-end;gap:10px;margin-top:8px">
+              <button id="btnSubmitQuiz" class="ok" style="font-size:.95rem;padding:11px 20px" onclick="calificarCuestionario()">Enviar y Calificar Cuestionario 📝</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div></section>
+</main>
+<audio id="player" hidden></audio>
+
+<script>
+const $=s=>document.querySelector(s);
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const api=async(u,o)=>{const r=await fetch(u,o);if(!r.ok)throw new Error(r.status);return r.json()};
+let cursos,curso,tema,view='Hub',qi=0,hist=[],handsFree=false,micHabilitado=false,state='idle',speakId=0,intentos=0,modoLibre=false,modoBienestar=false,leyendo=false,pages=[],pi=0;
+let pose='idle', poseT=0;
+const setPose=(p,t)=>{pose=p;poseT=t;};
+let emo='neutral',emoT=0,armA=0,spark=[];
+const setEmo=(e,t)=>{emo=e;emoT=t};
+const baseEmo=()=>state==='thinking'?'think':state==='listening'?'listen':modoBienestar?'calm':'neutral';
+const EMO={
+  neutral:{sm:.35,lift:0,tilt:0,eye:1,blush:0,roll:0,asym:0},
+  happy:{sm:1,lift:.5,tilt:0,eye:.88,blush:1,roll:0,asym:0},
+  sad:{sm:-.3,lift:0,tilt:1,eye:1,blush:0,roll:.04,asym:0},
+  think:{sm:0,lift:.3,tilt:-.6,eye:.95,blush:0,roll:-.04,asym:1},
+  listen:{sm:.35,lift:.45,tilt:0,eye:1.05,blush:.2,roll:.05,asym:0},
+  smile:{sm:1.5,lift:.4,tilt:0,eye:.82,blush:.5,roll:.02,asym:0},
+  amazed:{sm:.6,lift:1.2,tilt:0,eye:1.25,blush:.3,roll:0,asym:0,open:.5},
+  excited:{sm:1.4,lift:.9,tilt:0,eye:1.15,blush:.8,roll:.03,asym:0,open:.3},
+  tender:{sm:.9,lift:.3,tilt:.5,eye:.8,blush:.9,roll:.06,asym:0},
+  calm:{sm:.8,lift:0,tilt:.3,eye:.78,blush:.5,roll:.04,asym:0}
+};
+for(const k in EMO)EMO[k]={tear:0,open:0,wink:0,...EMO[k]};
+const E={sm:.35,lift:0,tilt:0,eye:1,blush:0,roll:0,asym:0,tear:0,open:0,wink:0};
+const J={'Content-Type':'application/json'};
+
+let actx,an,bins,mic,micAn,micSource=null,rec=null;
+const player=$('#player');
+
+// Cuestionario state
+let quizData=[];
+let quizRespuestas={};
+let quizCalificado=false;
+
+function renderMath(){
+  if(window.renderMathInElement){
+    renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});
+  }
+}
+
+function addTxt(c){
+  const t=$('#txt');
+  t.value+=c;
+  t.focus();
+}
+
+function syncMicBtn(){
+  const b=$('#btnMic');
+  if(micHabilitado){
+    b.className='sec mic-active';
+    b.textContent='🎤 Micrófono: ACTIVADO';
+  } else {
+    b.className='sec mic-disabled';
+    b.textContent='🔇 Micrófono: APAGADO';
+    $('#btnFinishNow').classList.add('hide');
+  }
+}
+
+function switchAulaTab(tab){
+  $('#secLibro').classList.toggle('hide',tab!=='libro');
+  $('#secDialogo').classList.toggle('hide',tab!=='dialogo');
+  $('#secQuiz').classList.toggle('hide',tab!=='quiz');
+  
+  $('#tabLibroBtn').classList.toggle('active',tab==='libro');
+  $('#tabDialogoBtn').classList.toggle('active',tab==='dialogo');
+  $('#tabQuizBtn').classList.toggle('active',tab==='quiz');
+
+  if(tab==='quiz'&&(!quizData||!quizData.length)){
+    cargarCuestionario();
+  }
+  renderMath();
+}
+
+function show(v){
+  view=v;
+  ['Hub','Temas','Aula'].forEach(n=>$('#v'+n).classList.toggle('hide',n!==v));
+  $('#back').classList.toggle('hide',v==='Hub');
+}
+
+function stopAll(){
+  handsFree=false;leyendo=false;$('#btnLeer').textContent='▶ Escuchar clase';
+  speakId++;player.pause();stopListening();setState('idle','Lista');
+}
+
+$('#back').onclick=()=>{
+  stopAll();
+  const h=modoLibre||modoBienestar||view!=='Aula';
+  modoLibre=false;
+  modoBienestar=false;
+  show(h?'Hub':'Temas');
+};
+
+function setState(s,l){
+  state=s;$('#dot').className='dot '+s;$('#lbl').textContent=l;
+  if(s==='listening'){$('#btnFinishNow').classList.remove('hide')}else{$('#btnFinishNow').classList.add('hide')}
+}
+
+function tile(icon,tag,title,desc,foot,fn){
+  const b=el('button','tile');
+  if(icon)b.append(el('div','ico',icon));if(tag)b.append(el('span','tag',tag));
+  b.append(el('b',null,title),el('span',null,desc),el('small',null,foot));b.onclick=fn;return b;
+}
+
+function renderHub(){
+  const g=$('#hubGrid');g.replaceChildren();
+  const tb=tile('🌿','Bienestar','Espacio de Escucha','Habla con Clara sobre cómo te sientes. Un espacio seguro y de contención.','Conversar →',openBienestar);
+  tb.classList.add('care');g.append(tb);
+  const f=tile('💬','Nuevo','Modo libre','Conversa con Clara sobre cualquier tema educativo de tu interés.','Conversar →',openLibre);
+  f.classList.add('free');g.append(f);
+  Object.values(cursos).forEach(c=>g.append(tile(c.icono,null,c.nombre,c.descripcion,`${c.temas.length} lecciones →`,()=>openCurso(c.id))));
+}
+
+function openCurso(id){
+  curso=cursos[id];$('#cTitulo').textContent=curso.nombre;$('#cDesc').textContent=curso.descripcion;
+  $('#msgGen').textContent='';renderTemas();show('Temas');
+}
+
+function renderTemas(){
+  const g=$('#topGrid');g.replaceChildren();
+  curso.temas.forEach(t=>g.append(tile(null,t.area||'General',t.titulo,t.resumen||'','Comenzar clase →',()=>openLeccion(t))));
+}
+
+$('#btnGen').onclick=async()=>{
+  const b=$('#btnGen'),m=$('#msgGen');b.disabled=true;m.style.color='var(--mute)';m.textContent='Generando lección…';
+  try{
+    const t=await api('/api/generar-tema',{method:'POST',headers:J,body:JSON.stringify({curso_nombre:curso.nombre,tema_solicitado:$('#nuevoTema').value.trim()})});
+    curso.temas.unshift(t);$('#nuevoTema').value='';m.textContent='';renderTemas();openLeccion(t);
+  } catch {
+    m.style.color='#b4233c';m.textContent='No se pudo generar la lección. Intenta de nuevo.';
+  }
+  b.disabled=false;
+};
+
+function openLeccion(t){
+  modoLibre=false;modoBienestar=false;intentos=0;tema=t;qi=0;hist=[];
+  quizData=[];quizRespuestas={};quizCalificado=false;
+  $('#quizResultBox').classList.add('hide');$('#refuerzoBox').classList.add('hide');
+
+  $('#aulaTabs').classList.remove('hide');
+  $('#libreHead').classList.add('hide');
+  $('#chat').classList.remove('big');
+  $('#chips').replaceChildren();
+  $('#lArea').textContent=t.area||curso.nombre;$('#lTitulo').textContent=t.titulo;$('#ampNote').textContent='';
+  
+  if(t.tipo==='ejercicio_guiado'||curso.id==='matematicas'){
+    $('#mathKeys').classList.remove('hide');
+  } else {
+    $('#mathKeys').classList.add('hide');
+  }
+
+  pages=t.paginas?.length?t.paginas:splitPages(t.contenido);pi=0;renderPage();if(!t.paginas&&!t._amp)ampliar(t);
+  $('#chat').replaceChildren();$('#banner').textContent='Escucha la clase o inicia el diálogo con la profesora.';
+  const s=$('#silabeo');s.replaceChildren();
+  if(t.palabras_estudio?.length){
+    s.append(el('b',null,'Taller de sílabas'));s.lastChild.style.cssText='display:block;margin-top:14px';
+    t.palabras_estudio.forEach(w=>{
+      const r=el('div','word'),l=el('div');
+      l.append(el('b',null,w.palabra+'  '));w.silabas.forEach(x=>l.append(el('span','sy',x)));
+      const rr=el('div','row'),tg=el('span','tag',w.tipo),bt=el('button','sec','Articular');bt.style.padding='4px 10px';
+      bt.onclick=()=>speak('Articulemos por sílabas: '+w.silabas.join('... '));rr.append(tg,bt);r.append(l,rr);s.append(r);
+    });
+  }
+  syncMicBtn();setState('idle','Lista');
+  switchAulaTab('libro');
+  show('Aula');renderMath();
+}
+
+function say(who,txt){
+  const b=el('div','b '+(who==='bot'?'bot':'me'));
+  b.append(el('strong',null,(who==='bot'?'Clara':'Tú')+': '),document.createTextNode(txt));
+  const c=$('#chat');c.append(b);c.scrollTop=c.scrollHeight;
+  hist.push({emisor:who==='bot'?'Profesora Clara':'Estudiante',texto:txt});
+  renderMath();
+}
+
+async function ensureAudio(){
+  if(!actx){
+    actx=new (window.AudioContext||window.webkitAudioContext)();
+    const s=actx.createMediaElementSource(player);an=actx.createAnalyser();an.fftSize=1024;an.smoothingTimeConstant=.5;
+    s.connect(an);an.connect(actx.destination);bins=new Uint8Array(an.frequencyBinCount);
+  }
+  if(actx.state==='suspended'){await actx.resume()}
+}
+
+function speak(text,done){
+  stopListening();ensureAudio();const id=++speakId;setState('speaking','Clara está hablando');
+  startCues(text);
+  const fin=()=>{if(id!==speakId)return;done?done():afterSpeak()};
+  const cleanTxt=text.replace(/\$+/g,'').replace(/\\frac{([^}]+)}{([^}]+)}/g,'$1 sobre $2').replace(/\\/g,'');
+  player.onended=fin;player.onerror=fin;player.src='/api/tts?texto='+encodeURIComponent(cleanTxt.slice(0,1800));
+  player.play().catch(fin);
+}
+
+function afterSpeak(){
+  if(micHabilitado&&handsFree){
+    setState('idle','Lista para escuchar');
+    startListening();
+  } else {
+    setState('idle','Lista (Escribe tu respuesta)');
+  }
+}
+
+async function startListening(){
+  if(!micHabilitado||!handsFree||state==='speaking'||state==='thinking')return;
+  await ensureAudio();
+  try{
+    if(!mic||!mic.active){
+      mic=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true}});
+    }
+    if(!micAn){
+      micAn=actx.createAnalyser();micAn.fftSize=512;
+    }
+    if(!micSource){
+      micSource=actx.createMediaStreamSource(mic);micSource.connect(micAn);
+    }
+  }catch(err){
+    setState('idle','Permite el micrófono o escribe tu respuesta');
+    return;
+  }
+  if(rec){rec.cancel();rec=null}
+  const r=new MediaRecorder(mic,{mimeType:MediaRecorder.isTypeSupported('audio/webm;codecs=opus')?'audio/webm;codecs=opus':'audio/webm'});
+  const ch=[],buf=new Uint8Array(micAn.frequencyBinCount);
+  let spoke=false,cancelled=false;
+  const monitor=setInterval(()=>{
+    micAn.getByteFrequencyData(buf);
+    let s=0;for(const v of buf)s+=v;
+    if(s/buf.length>8)spoke=true;
+  },100);
+  function finishRecording(){
+    clearInterval(monitor);
+    if(r.state!=='inactive')r.stop();
+  }
+  $('#btnFinishNow').onclick=()=>{spoke=true;finishRecording()};
+  rec={
+    cancel(){
+      cancelled=true;clearInterval(monitor);
+      if(r.state!=='inactive')r.stop();
+    }
+  };
+  r.ondataavailable=e=>{if(e.data&&e.data.size)ch.push(e.data)};
+  r.onstop=()=>{
+    clearInterval(monitor);
+    $('#btnFinishNow').classList.add('hide');
+    if(cancelled)return;
+    rec=null;
+    if(spoke&&ch.length){
+      transcribe(new Blob(ch,{type:r.mimeType}));
+    } else {
+      if(micHabilitado&&handsFree&&state==='listening'){
+        setState('idle','Lista');startListening();
+      }
+    }
+  };
+  r.start(250);
+  setState('listening','Grabando audio… presiona Enviar al terminar');
+}
+
+function stopListening(){
+  if(rec){rec.cancel();rec=null}
+  $('#btnFinishNow').classList.add('hide');
+}
+
+async function transcribe(blob){
+  setState('thinking','Transcribiendo…');
+  const f=new FormData();f.append('file',blob,'voz.webm');
+  try{
+    const d=await api('/api/stt',{method:'POST',body:f});
+    if(d.texto&&d.texto.trim())return answer(d.texto.trim());
+  }catch(e){}
+  setState('idle','Lista');
+  if(micHabilitado&&handsFree)startListening();
+}
+
+function startQuiz(){
+  if(!tema?.preguntas?.length)return;
+  detenerLectura();
+  switchAulaTab('dialogo');
+  handsFree=micHabilitado;qi=0;intentos=0;hist=[];$('#chat').replaceChildren();syncMicBtn();
+  const p=tema.preguntas[0],t='Iniciemos el diálogo guiado. Pregunta uno: '+p.pregunta;
+  $('#banner').textContent=`Pregunta 1 de ${tema.preguntas.length}: ${p.pregunta}`;
+  say('bot',t);speak(t);
+  renderMath();
+}
+
+async function answer(txt){
+  if(modoLibre)return answerLibre(txt);
+  if(modoBienestar)return answerBienestar(txt);
+  detenerLectura();speakId++;player.pause();stopListening();say('me',txt);reactUser(txt);setState('thinking','Clara está evaluando…');
+  const p=tema.preguntas[qi];let d;
+  try{
+    d=await api('/api/evaluar',{method:'POST',headers:J,body:JSON.stringify({
+      curso_nombre:curso.nombre,tema_titulo:tema.titulo,contenido:tema.contenido,pregunta_actual:p.pregunta,clave:p.clave,pista:p.pista||'',intentos,historial:histSend()
+    })});
+  } catch {
+    d={avanzar:false,texto_profesora:'Tuve un problema para evaluar. ¿Puedes repetir tu respuesta?'}
+  }
+  if(d.intento_fallido)intentos++;
+  say('bot',d.texto_profesora);
+  speak(d.texto_profesora,()=>{
+    if(!d.avanzar)return afterSpeak();
+    intentos=0;qi++;hist=[];
+    if(qi<tema.preguntas.length){
+      const s=tema.preguntas[qi],t='Siguiente pregunta: '+s.pregunta;
+      $('#banner').textContent=`Pregunta ${qi+1} de ${tema.preguntas.length}: ${s.pregunta}`;
+      say('bot',t);speak(t);
+    } else {
+      const finMsg='¡Excelente trabajo! Has completado el diálogo inicial. Ahora pasaremos al cuestionario de evaluación formativa para ver cuánto aprendiste.';
+      $('#banner').textContent='¡Diálogo completado! Pasando al Cuestionario...';
+      say('bot',finMsg);
+      speak(finMsg,()=>{
+        switchAulaTab('quiz');
+        cargarCuestionario();
+      });
+      handsFree=false;setState('idle','Diálogo completado');
+    }
+  });
+  renderMath();
+}
+
+/* =========================================================
+   SISTEMA DE CUESTIONARIO CON PUNTAJE Y REFUERZO ACTIVO
+========================================================= */
+
+async function cargarCuestionario(forzar=false){
+  if(quizData.length&&!forzar)return;
+  const list=$('#quizQuestionsList');
+  list.innerHTML='<div style="text-align:center;padding:24px;color:var(--mute)">✨ Preparando cuestionario de evaluación con Clara...</div>';
+  $('#quizResultBox').classList.add('hide');
+  $('#refuerzoBox').classList.add('hide');
+  quizRespuestas={};
+  quizCalificado=false;
+
+  try{
+    const d=await api('/api/generar-cuestionario',{
+      method:'POST',headers:J,
+      body:JSON.stringify({curso_nombre:curso.nombre,tema_titulo:tema.titulo,contenido:tema.contenido})
+    });
+    quizData=d.preguntas||[];
+    renderQuizQuestions();
+  } catch(e) {
+    list.innerHTML='<div style="text-align:center;padding:20px;color:var(--err)">No se pudo cargar el cuestionario. <button class="sec" onclick="cargarCuestionario(true)">Reintentar</button></div>';
+  }
+}
+
+function renderQuizQuestions(){
+  const list=$('#quizQuestionsList');
+  list.replaceChildren();
+
+  quizData.forEach((q,qIdx)=>{
+    const card=el('div','q-card');
+    card.id='qCard_'+qIdx;
+
+    const header=el('div','q-title',`${qIdx+1}. ${q.pregunta}`);
+    card.append(header);
+
+    const optsContainer=el('div','q-options');
+    q.opciones.forEach((op,oIdx)=>{
+      const btn=el('button','q-opt');
+      btn.id=`qOpt_${qIdx}_${oIdx}`;
+      const letters=['A','B','C','D'];
+      btn.innerHTML=`<span style="font-weight:700;color:var(--brand);width:20px">${letters[oIdx]})</span> <span>${op}</span>`;
+      
+      btn.onclick=()=>{
+        if(quizCalificado)return;
+        quizRespuestas[qIdx]=oIdx;
+        document.querySelectorAll(`[id^="qOpt_${qIdx}_"]`).forEach(b=>b.classList.remove('selected'));
+        btn.classList.add('selected');
+      };
+
+      optsContainer.append(btn);
+    });
+
+    card.append(optsContainer);
+
+    const fb=el('div','q-feedback hide');
+    fb.id='qFb_'+qIdx;
+    card.append(fb);
+
+    list.append(card);
+  });
+
+  renderMath();
+}
+
+async function calificarCuestionario(){
+  if(!quizData||!quizData.length)return;
+  if(quizCalificado)return;
+
+  // Verificar si respondió todas
+  const total=quizData.length;
+  const respondidas=Object.keys(quizRespuestas).length;
+  if(respondidas<total){
+    alert(`Por favor responde todas las preguntas (${respondidas} de ${total} contestadas).`);
+    return;
+  }
+
+  quizCalificado=true;
+  let aciertos=0;
+  const errores=[];
+
+  quizData.forEach((q,qIdx)=>{
+    const seleccion=quizRespuestas[qIdx];
+    const esCorrecto=(seleccion===q.correcta);
+    const card=$('#qCard_'+qIdx);
+    const fb=$('#qFb_'+qIdx);
+    fb.classList.remove('hide');
+
+    // Estilos de opciones
+    q.opciones.forEach((_,oIdx)=>{
+      const optBtn=$(`#qOpt_${qIdx}_${oIdx}`);
+      optBtn.disabled=true;
+      if(oIdx===q.correcta){
+        optBtn.classList.add('correct-opt');
+      } else if(oIdx===seleccion&&!esCorrecto){
+        optBtn.classList.add('wrong-opt');
+      }
+    });
+
+    if(esCorrecto){
+      aciertos++;
+      card.classList.add('is-correct');
+      fb.innerHTML=`<b style="color:var(--ok)">✓ ¡Correcto!</b> ${q.explicacion||''}`;
+    } else {
+      card.classList.add('is-wrong');
+      const letraCorr=['A','B','C','D'][q.correcta];
+      const letraSel=['A','B','C','D'][seleccion];
+      fb.innerHTML=`<b style="color:var(--err)">✗ Respuesta elegida (${letraSel}):</b> La correcta era la <b>${letraCorr}</b>. ${q.explicacion||''}`;
+      errores.push({
+        pregunta:q.pregunta,
+        respuesta_dada:q.opciones[seleccion],
+        respuesta_correcta:q.opciones[q.correcta],
+        concepto:q.concepto||'Tema central',
+        explicacion:q.explicacion
+      });
+    }
+  });
+
+  // Calcular nota sobre 20 (Sistema Minedu Perú)
+  const puntaje=(aciertos/total)*20;
+  $('#scoreValue').textContent=`${puntaje.toFixed(0)}/20`;
+  $('#scoreDetail').textContent=`${aciertos} de ${total} respuestas correctas`;
+  
+  if(puntaje>=18){
+    $('#scoreMsg').textContent='¡Excelente dominio del tema! 🌟';
+  } else if(puntaje>=14){
+    $('#scoreMsg').textContent='¡Buen trabajo! Reforcemos los puntos clave 👍';
+  } else {
+    $('#scoreMsg').textContent='¡Vamos a repasar juntos estos conceptos! 💪';
+  }
+
+  $('#quizResultBox').classList.remove('hide');
+  $('#quizActions').classList.add('hide');
+
+  // Llamar al refuerzo pedagógico de Clara
+  setState('thinking','Clara está analizando tu desempeño…');
+  try{
+    const r=await api('/api/reforzar',{
+      method:'POST',headers:J,
+      body:JSON.stringify({
+        curso_nombre:curso.nombre,
+        tema_titulo:tema.titulo,
+        contenido:tema.contenido,
+        puntaje:puntaje,
+        total_preguntas:total,
+        aciertos:aciertos,
+        errores:errores
+      })
+    });
+
+    if(r.texto_profesora){
+      $('#refuerzoBox').classList.remove('hide');
+      $('#refuerzoTexto').textContent=r.texto_profesora;
+      $('#banner').textContent=`Evaluación: ${puntaje.toFixed(0)}/20. Escuchando refuerzo...`;
+      speak(r.texto_profesora);
+    }
+  } catch(e){
+    setState('idle','Lista');
+  }
+
+  renderMath();
+}
+
+function reiniciarQuiz(){
+  quizRespuestas={};
+  quizCalificado=false;
+  $('#quizResultBox').classList.add('hide');
+  $('#refuerzoBox').classList.add('hide');
+  $('#quizActions').classList.remove('hide');
+  renderQuizQuestions();
+}
+
+/* =========================================================
+   LECTURA Y PAGINACIÓN
+========================================================= */
+
+function splitPages(txt,max=560){
+  const ss=txt.replace(/\s+/g,' ').match(/[^.!?]+[.!?]+["»')]*\s*|[^.!?]+$/g)||[txt],out=[];let cur='';
+  for(const x of ss){if(cur&&(cur+x).length>max){out.push(cur.trim());cur=''}cur+=x}
+  if(cur.trim())out.push(cur.trim());return out.map(t=>({titulo:'',texto:t}));
+}
+
+function renderPage(){
+  const p=pages[pi];
+  $('#pgTitulo').textContent=p.titulo||'';$('#pgTitulo').classList.toggle('hide',!p.titulo);$('#pgTexto').textContent=p.texto;
+  $('#pgNum').textContent=`Página ${pi+1} de ${pages.length}`;$('#pgPrev').disabled=pi===0;$('#pgNext').disabled=pi===pages.length-1;
+  const dd=$('#pgDots');dd.replaceChildren();
+  pages.forEach((_,i)=>{
+    const b=el('button',i===pi?'on':'');b.setAttribute('aria-label','Ir a la página '+(i+1));
+    b.onclick=()=>{detenerLectura();pi=i;renderPage()};dd.append(b);
+  });
+  const bd=$('#pgBody');bd.classList.remove('flip');void bd.offsetWidth;bd.classList.add('flip');
+  renderMath();
+}
+
+function irPagina(d){detenerLectura();pi=Math.max(0,Math.min(pages.length-1,pi+d));renderPage()}
+$('#pgPrev').onclick=()=>irPagina(-1);$('#pgNext').onclick=()=>irPagina(1);
+addEventListener('keydown',e=>{
+  if(view!=='Aula'||modoLibre||modoBienestar||e.target.tagName==='INPUT')return;
+  if(e.key==='ArrowRight')irPagina(1);if(e.key==='ArrowLeft')irPagina(-1);
+});
+
+async function ampliar(t){
+  t._amp=true;$('#ampNote').textContent='✨ Clara está preparando la clase completa…';
+  try{
+    const d=await api('/api/ampliar-tema',{method:'POST',headers:J,body:JSON.stringify({curso_nombre:curso.nombre,titulo:t.titulo,contenido:t.contenido})});
+    t.paginas=d.paginas;t.contenido=d.paginas.map(p=>p.texto).join('\n\n');
+    if(tema===t&&!leyendo&&!modoLibre&&!modoBienestar){pages=t.paginas;pi=0;renderPage()}
+  } catch {
+    t._amp=false;
+  }
+  if(tema===t)$('#ampNote').textContent='';
+}
+
+function detenerLectura(){
+  if(!leyendo)return;leyendo=false;speakId++;player.pause();setState('idle','Lista');$('#btnLeer').textContent='▶ Escuchar clase';
+}
+
+function leerDesde(i){
+  if(i>=pages.length){leyendo=false;$('#btnLeer').textContent='▶ Escuchar clase';return setState('idle','Lista')}
+  pi=i;renderPage();leyendo=true;$('#btnLeer').textContent='■ Detener lectura';
+  const p=pages[i];speak((p.titulo?p.titulo+'. ':'')+p.texto,()=>{if(leyendo)leerDesde(i+1)});
+}
+
+$('#btnLeer').onclick=()=>{if(leyendo)return detenerLectura();handsFree=false;leerDesde(pi)};
+const histSend=()=>hist.slice(-16).map(h=>({emisor:h.emisor,texto:h.texto.slice(0,2400)}));
+
+/* =========================================================
+   MODO LIBRE Y ESPACIO SEGURO
+========================================================= */
+
+function openLibre(){
+  modoLibre=true;modoBienestar=false;tema=null;hist=[];handsFree=micHabilitado;syncMicBtn();
+  $('#aulaTabs').classList.add('hide');$('#secLibro').classList.add('hide');$('#secQuiz').classList.add('hide');
+  $('#secDialogo').classList.remove('hide');$('#libreHead').classList.remove('hide');$('#chat').classList.add('big');$('#mathKeys').classList.add('hide');
+  $('#tagLibre').textContent='Modo libre';$('#hLibre').textContent='Conversa con Clara';$('#pLibre').textContent='Pregunta lo que quieras aprender. Clara solo conversa de temas educativos.';
+  $('#chat').replaceChildren();$('#chips').replaceChildren();$('#banner').textContent='Modo libre: pregúntame lo que quieras aprender.';
+  setState('idle','Lista');show('Aula');
+  const g='¡Hola! Estamos en modo libre. Puedes preguntarme de ciencias, historia, matemáticas, lenguaje, tecnología o lo que te dé curiosidad, siempre que sea para aprender. ¿Qué te gustaría saber hoy?';
+  say('bot',g);speak(g);renderMath();
+}
+
+async function answerLibre(txt){
+  speakId++;player.pause();stopListening();say('me',txt);reactUser(txt);$('#chips').replaceChildren();setState('thinking','Clara está pensando…');
+  let d;try{d=await api('/api/libre',{method:'POST',headers:J,body:JSON.stringify({historial:histSend()})})}
+  catch{d={texto_profesora:'Tuve un problema para responder. ¿Puedes repetir tu pregunta?',sugerencias:[]}}
+  say('bot',d.texto_profesora);
+  (d.sugerencias||[]).forEach(q=>{const b=el('button','chip',q);b.onclick=()=>answer(q);$('#chips').append(b)});
+  speak(d.texto_profesora);renderMath();
+}
+
+function openBienestar(){
+  modoLibre=false;modoBienestar=true;tema=null;hist=[];handsFree=micHabilitado;syncMicBtn();
+  $('#aulaTabs').classList.add('hide');$('#secLibro').classList.add('hide');$('#secQuiz').classList.add('hide');
+  $('#secDialogo').classList.remove('hide');$('#libreHead').classList.remove('hide');$('#chat').classList.add('big');$('#mathKeys').classList.add('hide');
+  $('#tagLibre').textContent='Espacio Seguro';$('#hLibre').textContent='Conversa con Clara';$('#pLibre').textContent='Aquí puedes hablar sobre cómo te sientes. Te escucho sin juzgar.';
+  $('#chat').replaceChildren();$('#chips').replaceChildren();$('#banner').textContent='Espacio de bienestar y escucha activa.';
+  setState('idle','Lista');show('Aula');
+  const g='Hola. Este es un espacio seguro para ti. ¿Cómo te has sentido últimamente? Estoy aquí para escucharte.';
+  say('bot',g);speak(g);renderMath();
+}
+
+async function answerBienestar(txt){
+  speakId++;player.pause();stopListening();say('me',txt);reactUser(txt);$('#chips').replaceChildren();setState('thinking','Clara está escuchando…');
+  let d;try{d=await api('/api/bienestar',{method:'POST',headers:J,body:JSON.stringify({historial:histSend()})})}
+  catch{d={texto_profesora:'Te sigo escuchando. ¿Podrías repetirme eso último?'}}
+  say('bot',d.texto_profesora);speak(d.texto_profesora);renderMath();
+}
+
+$('#btnQuiz').onclick=startQuiz;
+$('#btnMic').onclick=async()=>{
+  micHabilitado=!micHabilitado;handsFree=micHabilitado;syncMicBtn();
+  if(micHabilitado){
+    if(state==='idle')await startListening();
+  } else {
+    stopListening();setState('idle','Micrófono apagado (Solo texto)');
+  }
+};
+const enviar=()=>{const v=$('#txt').value.trim();if(v){$('#txt').value='';answer(v)}};
+$('#btnEnv').onclick=enviar;$('#txt').onkeydown=e=>{if(e.key==='Enter')enviar()};
+
+/* =========================================================
+   ANIMACIONES DE AVATAR, BOCA Y EMOCIONES
+========================================================= */
+const rnd=(a,b)=>a+Math.random()*(b-a),NS='http://www.w3.org/2000/svg';
+const AV={};['cBody','cBraidL','cBraidR','cArm','cFore','cHand','cHead','irisL','irisR','lidL','lidR','llidL','llidR','lashL','lashR','browL','browR','blushL','blushR','mFill','mIn','mLine','mClipP','mTeeth','mTongue','sparks','headset'].forEach(id=>AV[id]=document.getElementById(id));
+const HEADSET=true;
+AV.headset.style.display=HEADSET?'':'none';
+
+let m={o:0,w:1},tm={o:0,w:1},brow=0,gx=0,gy=0,tgx=0,tgy=0,nSac=1,nBlink=2,blink=-1,T=0,last=performance.now();
+
+function readMouth(){
+  let o=0,w=1;
+  if(state==='speaking'&&an&&!player.paused){
+    an.getByteFrequencyData(bins);
+    const a=(x,y)=>{let s=0;for(let i=x;i<y;i++)s+=bins[i];return s/(y-x)/255};
+    const mid=a(6,20),hi=a(21,64),fr=a(90,200),e=a(3,64);
+    o=Math.min(1,Math.max(0,(e-.06)*3.2));w=Math.min(1.4,Math.max(.6,.55+hi/(mid+hi+.01)*1.1));
+    if(fr>mid*.9&&fr>.05){o*=.4;w=1.25}
+  }
+  tm.o=o;tm.w=w;
+}
+
+function burst(){
+  for(let i=0;i<20;i++){
+    const el=document.createElementNS(NS,'circle');
+    el.setAttribute('r',rnd(1.6,3.6).toFixed(1));el.setAttribute('fill',Math.random()<.5?'#ffe27a':'#fff3b0');
+    AV.sparks.appendChild(el);
+    const a=rnd(-Math.PI*.95,-Math.PI*.05),v=rnd(70,190);
+    spark.push({el,x:200,y:110,vx:Math.cos(a)*v,vy:Math.sin(a)*v,l:rnd(.7,1.4)});
+  }
+}
+
+const set=(id,k,v)=>AV[id]&&AV[id].setAttribute(k,v);
+let cues=[],cueI=-1,cuesTot=1;
+const RULES=[
+  ['happy',/muy bien|excelente|perfecto|felicit|bravo|correcto|eso es|acertaste/,'nod','burst'],
+  ['excited',/emocionante|genial|fantástic|descubr|vamos a/],
+  ['tender',/gracias|aprecio|valoro|estoy aquí|te escucho|entiendo/,'empathy'],
+  ['think',/calcul|resolv|ecuaci|problema|sumar|restar|fórmula|analiz/],
+  ['calm',/respira|tranquil|calma|poco a poco|sin prisa/],
+  ['smile',/sonr[ií]|feliz|alegr|contenta|con gusto|encantada/]
+];
+
+const matchRule=t=>{for(const [emo,re,pose,fx] of RULES)if(re.test(t))return {emo,pose:pose||null,fx:fx||null};return null};
+
+function startCues(text){
+  const parts=text.replace(/\$+/g,'').split(/(?<=[.!?…])\s+/).filter(x=>x.trim());
+  cuesTot=parts.reduce((a,x)=>a+x.length,0)||1;let acc=0;
+  cues=parts.map(x=>{acc+=x.length;const r=matchRule(x.toLowerCase())||(/!/.test(x)?{emo:'smile'}:{});return {end:acc/cuesTot,len:x.length,emo:r.emo||null,pose:r.pose||null,fx:r.fx||null}});
+  cueI=-1;
+}
+
+const USR=[
+  ['happy',/gracias|genial|me encanta|feliz|lo logré|aprobé/],
+  ['tender',/no entiendo|no sé|me confund|no puedo|difícil/]
+];
+function reactUser(txt){const t=String(txt).toLowerCase();for(const [e,re] of USR)if(re.test(t)){setEmo(e,3);if(e==='happy')burst();return}}
+
+function frame(now){
+  const dt=Math.min(.05,(now-last)/1000);last=now;requestAnimationFrame(frame);
+  if(view!=='Aula')return;
+  T+=dt;readMouth();
+  const k=1-Math.exp(-dt*28);m.o+=(tm.o-m.o)*k;m.w+=(tm.w-m.w)*k;
+  if(m.o>.8)brow=Math.min(1,brow+dt*3);brow*=Math.exp(-dt*2);
+
+  poseT-=dt;if(poseT<=0)pose='idle';
+  if(state==='speaking'&&cues.length&&!player.paused){
+    const du=player.duration,fr=isFinite(du)&&du>1?player.currentTime/du:Math.min(.999,player.currentTime*15/cuesTot);
+    let k=cues.findIndex(c=>fr<=c.end);if(k<0)k=cues.length-1;
+    if(k!==cueI){cueI=k;const c=cues[k];setEmo(c.emo||baseEmo(),Math.max(2.4,c.len/13));if(c.pose)setPose(c.pose,2.6);if(c.fx==='burst')burst()}
+  }
+  emoT-=dt;if(emoT<=0)emo=baseEmo();
+  const tg=EMO[emo]||EMO.neutral,ke=1-Math.exp(-dt*6);
+  for(const kk in E)E[kk]+=(tg[kk]-E[kk])*ke;
+  armA+=((pose==='wave'?1:0)-armA)*(1-Math.exp(-dt*7));
+
+  nBlink-=dt;if(nBlink<=0&&blink<0){blink=0;nBlink=rnd(2,5.5)}
+  if(blink>=0){blink+=dt/.16;if(blink>1.15)blink=-1}
+  nSac-=dt;if(nSac<=0){tgx=rnd(-.8,.8);tgy=rnd(-.5,.5);nSac=rnd(.8,2.8)}
+  if(emo==='think'){tgx=.75;tgy=-.7}
+  gx+=(tgx-gx)*(1-Math.exp(-dt*14));gy+=(tgy-gy)*(1-Math.exp(-dt*14));
+
+  const lidBase=9+(1-E.eye)*45,bl=blink<0?0:Math.min(1,Math.sin(Math.min(blink,1)*Math.PI));
+  for(const [s,cx] of [['L',163],['R',237]]){
+    const bs=s==='R'?Math.max(bl,E.wink):bl,yE=151+lidBase+(41-lidBase)*bs,yL=196-Math.max(0,E.sm-.3)*9*(1-bs);
+    set('lid'+s,'d',`M${cx-26} 138 L${cx+26} 138 L${cx+26} ${yE+1} Q${cx} ${yE-7} ${cx-26} ${yE+1} Z`);
+    set('lash'+s,'d',`M${cx-26} ${yE+1} Q${cx} ${yE-7} ${cx+26} ${yE+1}`);
+    set('llid'+s,'d',`M${cx-26} 212 L${cx+26} 212 L${cx+26} ${yL} Q${cx} ${yL-5} ${cx-26} ${yL} Z`);
+    set('iris'+s,'transform',`translate(${(gx*4.5).toFixed(2)} ${(gy*3).toFixed(2)})`);
+  }
+
+  const br=-brow*5,inY=138+br*.6-E.lift*6-E.tilt*7,outY=141+br*.4-E.lift*4+E.tilt*4,midY=131+br-E.lift*6-E.tilt*2,as=E.asym*-4;
+  set('browL','d',`M142 ${outY.toFixed(1)} Q163 ${midY.toFixed(1)} 186 ${inY.toFixed(1)}`);
+  set('browR','d',`M258 ${(outY+as*.6).toFixed(1)} Q237 ${(midY+as).toFixed(1)} 214 ${(inY+as*.8).toFixed(1)}`);
+  const bo=(.18+E.blush*.5).toFixed(2);set('blushL','opacity',bo);set('blushR','opacity',bo);
+
+  const my=231,hw=Math.min(27,Math.max(10,18*m.w+E.sm*2.5)),gap=Math.min(26,m.o*22+E.open*12);
+  const cy=my-E.sm*4.5,uc=my-4-gap*.1,lc=my+3+gap*1.75+Math.max(0,E.sm)*6,Lx=200-hw,Rx=200+hw;
+  const d=`M${Lx.toFixed(1)} ${cy.toFixed(1)} Q200 ${uc.toFixed(1)} ${Rx.toFixed(1)} ${cy.toFixed(1)} Q200 ${lc.toFixed(1)} ${Lx.toFixed(1)} ${cy.toFixed(1)} Z`;
+  set('mFill','d',d);set('mIn','d',d);set('mLine','d',d);set('mClipP','d',d);
+  set('mIn','opacity',Math.min(1,gap/3).toFixed(2));
+  const tv=Math.max(0,Math.min(1,(gap-1.5)/3)).toFixed(2);
+  set('mTeeth','x',(200-hw*.8).toFixed(1));set('mTeeth','y',((cy+uc)/2-.5).toFixed(1));
+  set('mTeeth','width',(hw*1.6).toFixed(1));set('mTeeth','height',Math.min(7,gap*.45+.6).toFixed(1));set('mTeeth','opacity',tv);
+  set('mTongue','cx',200);set('mTongue','cy',((cy+lc)/2-1).toFixed(1));
+  set('mTongue','rx',(hw*.5).toFixed(1));set('mTongue','ry',Math.max(.5,gap*.32).toFixed(1));set('mTongue','opacity',tv);
+
+  let hY=0,hX=0,hR=E.roll;
+  if(pose==='nod')hY=Math.sin(T*10)*4.5;
+  if(pose==='shake')hX=Math.sin(T*12)*3.6;
+  if(pose==='empathy')hR+=Math.sin(T*1.5)*.02;
+  if(pose==='wave')hR+=.03;
+  const bx=Math.sin(T*.7)*1.5+hX,by=Math.sin(T*1.6)*1.6+m.o*1.5+hY;
+  const deg=(Math.sin(T*.5)*.025+(state==='speaking'?Math.sin(T*3.1)*.012:0)+hR)*57.3;
+  set('cHead','transform',`translate(${bx.toFixed(2)} ${by.toFixed(2)}) rotate(${deg.toFixed(2)} 200 262)`);
+  set('cBody','transform',`translate(200 400) scale(1 ${(1+.006*Math.sin(T*1.6)).toFixed(4)}) translate(-200 -400)`);
+
+  const wv=Math.sin(T*9)*14*armA;
+  set('cArm','transform',`translate(256 332) rotate(${(-105*armA).toFixed(2)})`);
+  set('cArm','opacity',Math.min(1,armA*4).toFixed(2));
+  set('cFore','transform',`translate(0 50) rotate(${(-85*armA+wv).toFixed(2)})`);
+  set('cHand','transform',`translate(0 58) rotate(${(Math.sin(T*10+.9)*10*armA).toFixed(2)}) scale(1.08)`);
+
+  const sw=Math.sin(T*1.3)*1.6+deg*.5+(state==='speaking'?Math.sin(T*3.1)*.8:0);
+  set('cBraidL','transform',`translate(136 206) rotate(${sw.toFixed(2)})`);
+  set('cBraidR','transform',`translate(264 206) scale(-1 1) rotate(${(-sw*.8+Math.sin(T*1.1+1)*1.2).toFixed(2)})`);
+
+  for(let i=spark.length-1;i>=0;i--){
+    const q=spark[i];q.l-=dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.vy+=170*dt;
+    if(q.l<=0){q.el.remove();spark.splice(i,1);continue}
+    q.el.setAttribute('cx',q.x.toFixed(1));q.el.setAttribute('cy',q.y.toFixed(1));q.el.setAttribute('opacity',Math.min(1,q.l*1.6).toFixed(2));
+  }
+}
+requestAnimationFrame(frame);
+
+(async()=>{try{cursos=await api('/api/cursos');renderHub()}catch{$('#hubGrid').append(el('p',null,'No se pudo conectar con el servidor.'))}})();
+</script>
+</body>
+</html>

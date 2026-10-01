@@ -17,7 +17,6 @@ BASE = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE))
 from cursos import CATALOGO_CURSOS
 
-# Cargar automáticamente variables de entorno desde .env si existe
 def cargar_env():
     env_file = BASE / ".env"
     if env_file.exists():
@@ -36,7 +35,7 @@ def cargar_env():
 
 cargar_env()
 
-API_KEY = os.getenv("GROQ_API_KEY", "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")
+API_KEY = os.getenv("GROQ_API_KEY")
 MODELOS = [m.strip() for m in os.getenv("MODELOS_LLM", "openai/gpt-oss-20b,openai/gpt-oss-120b").split(",")]
 STT_MODEL = "whisper-large-v3-turbo"
 VOZ = "es-PE-CamilaNeural"
@@ -113,14 +112,13 @@ class CuestionarioReq(BaseModel):
     tema_titulo: str = Field(max_length=160)
     contenido: str = Field(max_length=8000)
 
-class RefuerzoReq(BaseModel):
+class ErrorUnicoReq(BaseModel):
     curso_nombre: str = Field(max_length=80)
     tema_titulo: str = Field(max_length=160)
-    contenido: str = Field(max_length=8000)
-    puntaje: float = Field(ge=0, le=20)
-    total_preguntas: int = Field(ge=1, le=20)
-    aciertos: int = Field(ge=0, le=20)
-    errores: List[Dict[str, Any]] = Field(default_factory=list)
+    pregunta: str = Field(max_length=400)
+    respuesta_dada: str = Field(max_length=400)
+    respuesta_correcta: str = Field(max_length=400)
+    explicacion: str = Field(max_length=800)
 
 @app.get("/api/cursos")
 def cursos() -> Dict[str, Any]:
@@ -286,41 +284,27 @@ Nota: 'correcta' debe ser un número entero de 0 a 3 (0 para la primera opción,
         raise HTTPException(502, "No se pudo generar el cuestionario")
     return {"preguntas": validas}
 
-@app.post("/api/reforzar")
-def reforzar(r_req: RefuerzoReq) -> Dict[str, Any]:
-    errores_txt = ""
-    if r_req.errores:
-        for i, e in enumerate(r_req.errores):
-            errores_txt += f"\n- Error {i+1} en '{e.get('concepto', 'General')}': Pregunta: {e.get('pregunta')}. El alumno marcó: '{e.get('respuesta_dada')}'. La correcta era: '{e.get('respuesta_correcta')}'. Razón: {e.get('explicacion')}"
-    else:
-        errores_txt = "¡El estudiante no tuvo errores! Acertó todas las preguntas."
-
-    system = f"""Eres la Profesora Clara, docente empática y pedagógica de secundaria en Perú.
-Curso: '{r_req.curso_nombre}'. Tema: '{r_req.tema_titulo}'.
-El estudiante completó el cuestionario con una nota de {r_req.puntaje:.1f}/20 ({r_req.aciertos} de {r_req.total_preguntas} correctas).
-Detalle de su desempeño:
-{errores_txt}
+@app.post("/api/explicar-error")
+def explicar_error(e: ErrorUnicoReq) -> Dict[str, Any]:
+    system = f"""Eres la Profesora Clara, docente empática de secundaria en Perú.
+Curso: '{e.curso_nombre}'. Tema: '{e.tema_titulo}'.
+El estudiante se equivocó en esta pregunta: "{e.pregunta}"
+Eligió: "{e.respuesta_dada}". La correcta es: "{e.respuesta_correcta}".
+Explicación técnica del concepto: {e.explicacion}
 
 TU TAREA:
-1. Si tuvo errores: Refuerza ENSEÑÁNDOLE con calidez, cercanía y pedagogía exactamente los puntos y conceptos en los que falló. Explícale la idea clave de forma sencilla y amigable para despejar su duda.
-2. Si tuvo nota perfecta (20): Felicítalo efusivamente, resalta su esfuerzo y compártele un dato curioso motivador.
-3. Extensión: 3 a 5 oraciones claras (máximo 850 caracteres). Usa delimitadores $$ $$ si hay matemáticas.
-Responde SOLO JSON: {{"texto_profesora": "tu refuerzo pedagógico aquí", "consejos": ["consejo 1", "consejo 2"]}}"""
+Explica con calidez y paciencia por qué su respuesta es incorrecta y enséñale el concepto correcto de forma sencilla para que pueda volver a intentarlo.
+Máximo 4 oraciones (800 caracteres). Termina animándolo a intentarlo de nuevo. Usa $$ $$ para matemáticas.
+Responde SOLO JSON: {{"texto_profesora": "tu explicación aquí"}}"""
 
     d = llm_json(
         [{"role": "system", "content": system},
-         {"role": "user", "content": "Genera el refuerzo y retroalimentación pedagógica para el estudiante."}],
-        max_tokens=1200, temperature=0.5, timeout=40)
-    
+         {"role": "user", "content": "Genera la explicación pedagógica en base al error."}],
+        max_tokens=800, temperature=0.5, timeout=40)
+
     if d and str(d.get("texto_profesora", "")).strip():
-        return {
-            "texto_profesora": str(d["texto_profesora"]).strip()[:1600],
-            "consejos": [str(c)[:100] for c in d.get("consejos", []) if isinstance(c, str)][:3]
-        }
-    return {
-        "texto_profesora": f"¡Buen trabajo en esta evaluación! Obtuviste {r_req.puntaje:.0f}/20. Recuerda repasar los puntos clave para afianzar lo aprendido.",
-        "consejos": ["Revisa las explicaciones de cada pregunta", "Vuelve a practicar cuando gustes"]
-    }
+        return {"texto_profesora": str(d["texto_profesora"]).strip()}
+    return {"texto_profesora": "Revisa bien los conceptos de la lectura. ¡Inténtalo de nuevo, tú puedes!"}
 
 @app.post("/api/libre")
 def libre(d: LibreReq) -> Dict[str, Any]:
@@ -366,6 +350,7 @@ Responde solo JSON válido: {"respuesta": "tu respuesta aquí"}"""
 
 @app.get("/")
 def home() -> FileResponse:
+    os.makedirs("static", exist_ok=True)
     return FileResponse(BASE / "static" / "index.html")
 
 app.mount("/static", StaticFiles(directory=BASE / "static"), name="static")

@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+edge-tts
+openai
+python-multipart

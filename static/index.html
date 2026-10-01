@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aula Clara · Tutor Curricular Secundaria</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMath()"></script>
+<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+<link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+<link href="[https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap)" rel="stylesheet">
+<link rel="stylesheet" href="[https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css](https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css)">
+<script defer src="[https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js](https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js)"></script>
+<script defer src="[https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js](https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js)" onload="renderMath()"></script>
 <style>
 :root{--bg:#f4f6fb;--card:#fff;--ink:#152036;--mute:#5b6b85;--line:#e2e8f4;--brand:#3742d1;--brand-hover:#2a33b0;--soft:#eceffe;--ok:#0d9488;--ok-bg:#e6fbf8;--err:#e11d48;--err-bg:#fff1f2;--stage:#080e1f;--holo:#38e1ff}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -38,7 +38,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 input[type=text]{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;font-size:.92rem;background:#fff;color:var(--ink)}
 input[type=text]:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--soft)}
 
-/* AULA LAYOUT AJUSTADO A UNA SOLA PANTALLA Y MÁS ANCHO */
+/* AULA LAYOUT AJUSTADO */
 .aula{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:stretch}
 .stage{background:radial-gradient(ellipse at 50% 15%,#14284f,var(--stage) 75%);color:#dff8ff;border-radius:18px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:0 8px 24px -8px rgba(8,14,31,.5);min-height:480px;justify-content:space-between}
 .stage-top{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
@@ -59,7 +59,7 @@ input[type=text]:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3
 .btn-finish{background:#38e1ff!important;color:#041527!important;font-weight:700;width:100%;box-shadow:0 0 15px rgba(56,225,255,.4)}
 .hint-audio{font-size:.74rem;color:#8ba5cb;text-align:center;line-height:1.3}
 
-/* PANEL DERECHO: PESTAÑAS, LECTURA, DIÁLOGO Y CUESTIONARIO */
+/* PANEL DERECHO */
 .lesson{display:flex;flex-direction:column;gap:12px}
 .tabs-nav{display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:6px;flex-wrap:wrap;align-items:center}
 .tab-btn{background:transparent;border:1px solid transparent;color:var(--mute);padding:7px 14px;border-radius:8px;font-size:.86rem;font-weight:600;display:flex;align-items:center;gap:6px}
@@ -84,7 +84,7 @@ input[type=text]:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3
 @keyframes pg{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
 .flip{animation:pg .25s ease}
 
-/* DIALOGO / CHAT Y AREA DE ESCRITURA MAS ARRIBA */
+/* DIALOGO */
 .chat-container{display:flex;flex-direction:column;gap:8px}
 .chat{height:min(44vh,340px);overflow-y:auto;background:#f8fafd;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
 .chat.big{height:min(58vh,480px)}
@@ -102,11 +102,6 @@ input[type=text]:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3
 
 /* CUESTIONARIO CON PUNTAJE Y REFUERZO */
 .quiz-panel{display:flex;flex-direction:column;gap:14px;max-height:min(68vh,520px);overflow-y:auto;padding-right:4px}
-.quiz-score-card{background:linear-gradient(135deg,#eceffe,#e0f2fe);border:1px solid #bfdbfe;border-radius:12px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-.score-main{display:flex;align-items:baseline;gap:8px}
-.score-num{font-size:1.8rem;font-weight:800;color:var(--brand)}
-.score-label{font-size:.88rem;font-weight:600;color:var(--ink)}
-.score-sub{font-size:.78rem;color:var(--mute)}
 .q-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:all .15s ease}
 .q-card.is-correct{border-color:var(--ok);background:var(--ok-bg)}
 .q-card.is-wrong{border-color:var(--err);background:var(--err-bg)}
@@ -117,10 +112,7 @@ input[type=text]:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3
 .q-opt.selected{border-color:var(--brand);background:var(--soft);font-weight:600}
 .q-opt.correct-opt{border-color:var(--ok)!important;background:#d1fae5!important;font-weight:700;color:#065f46}
 .q-opt.wrong-opt{border-color:var(--err)!important;background:#ffe4e6!important;color:#9f1239;text-decoration:line-through}
-.q-feedback{font-size:.84rem;padding:8px 10px;border-radius:6px;background:rgba(255,255,255,.8);line-height:1.4}
-.refuerzo-box{background:linear-gradient(135deg,#fff8eb,#fef3c7);border:1px solid #fde68a;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
-.refuerzo-box b{color:#92400e;display:flex;align-items:center;gap:6px;font-size:.92rem}
-.refuerzo-box p{color:#78350f;font-size:.88rem;line-height:1.5}
+.q-feedback{font-size:.88rem;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,.9);line-height:1.45;border-left:3px solid var(--brand)}
 
 .word{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-top:6px}
 .sy{display:inline-block;background:#fff1f2;border:1px solid #fecdd3;color:#e11d48;font-weight:700;padding:2px 8px;border-radius:6px;margin-right:4px;font-size:.84rem}
@@ -165,15 +157,13 @@ input[type=text]:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3
     <!-- COLUMNA IZQUIERDA: AVATAR DE CLARA Y ESTADO DE AUDIO -->
     <aside class="stage">
       <div class="stage-top">
-        <div class="av"><svg id="av" viewBox="0 0 400 400" role="img" aria-label="Profesora Clara" xmlns="http://www.w3.org/2000/svg">
+        <div class="av"><svg id="av" viewBox="0 0 400 400" role="img" aria-label="Profesora Clara" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
 <defs>
   <radialGradient id="gGlow" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#38e1ff" stop-opacity=".24"/><stop offset="1" stop-color="#38e1ff" stop-opacity="0"/></radialGradient>
   <radialGradient id="gSkin" cx="42%" cy="38%" r="75%"><stop offset="0" stop-color="#ffdcc2"/><stop offset=".65" stop-color="#f4b995"/><stop offset="1" stop-color="#e59f7c"/></radialGradient>
   <linearGradient id="gHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#85523b"/><stop offset="1" stop-color="#4a2718"/></linearGradient>
   <linearGradient id="gHairBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5e3625"/><stop offset="1" stop-color="#37190f"/></linearGradient>
   <linearGradient id="gShirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5aa47b"/><stop offset="1" stop-color="#3a7654"/></linearGradient>
-  <linearGradient id="gSilk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#e4d9c6"/></linearGradient>
-  <linearGradient id="gSatin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#30303b"/><stop offset="1" stop-color="#0f0f14"/></linearGradient>
   <radialGradient id="gIris" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#b98050"/><stop offset=".55" stop-color="#7a4a2c"/><stop offset="1" stop-color="#3f2313"/></radialGradient>
   <clipPath id="ecL"><circle cx="163" cy="175" r="21"/></clipPath>
   <clipPath id="ecR"><circle cx="237" cy="175" r="21"/></clipPath>
@@ -364,13 +354,12 @@ input[type=text]:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3
           <div id="silabeo"></div>
         </div>
 
-        <!-- SECCIÓN 2: DIÁLOGO / CHAT (MÁS ARRIBA Y ANCHO) -->
+        <!-- SECCIÓN 2: DIÁLOGO / CHAT -->
         <div id="secDialogo" class="hide">
           <div class="chat-container">
             <div class="chat" id="chat" aria-live="polite"></div>
             <div class="chips" id="chips"></div>
             
-            <!-- PANEL DE ENTRADA POSICIONADO ARRIBA / DIRECTAMENTE BAJO EL CHAT -->
             <div class="input-panel">
               <div class="math-keys hide" id="mathKeys">
                 <button onclick="addTxt('√')">√</button>
@@ -394,44 +383,21 @@ input[type=text]:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3
           </div>
         </div>
 
-        <!-- SECCIÓN 3: CUESTIONARIO FINAL CON PUNTAJE Y REFUERZO -->
+        <!-- SECCIÓN 3: CUESTIONARIO PASO A PASO (EVALUACIÓN UNO A UNO) -->
         <div id="secQuiz" class="hide">
           <div class="quiz-panel" id="quizContainer">
             <div class="head">
               <div>
-                <span class="tag">Evaluación Formativa</span>
-                <h2 style="margin-top:4px">Cuestionario de Comprobación</h2>
-                <p style="color:var(--mute);font-size:.84rem">Responde las preguntas para evaluar lo aprendido y recibir retroalimentación personalizada.</p>
+                <span class="tag">Evaluación Formativa Continua</span>
+                <h2 style="margin-top:4px">Cuestionario Guiado</h2>
+                <p style="color:var(--mute);font-size:.84rem">Responde la pregunta. Si te equivocas, la Profesora Clara te enseñará el concepto correcto para que vuelvas a intentarlo.</p>
               </div>
               <button id="btnGenerarQuiz" class="sec" onclick="cargarCuestionario(true)">🔄 Regenerar preguntas</button>
             </div>
-
-            <!-- RESULTADOS Y PUNTAJE -->
-            <div id="quizResultBox" class="hide">
-              <div class="quiz-score-card">
-                <div class="score-main">
-                  <span class="score-num" id="scoreValue">--/20</span>
-                  <div>
-                    <div class="score-label" id="scoreMsg">Puntaje obtenido</div>
-                    <div class="score-sub" id="scoreDetail">0 de 0 correctas</div>
-                  </div>
-                </div>
-                <button class="pri" onclick="reiniciarQuiz()">Volver a intentar 🔁</button>
-              </div>
-
-              <!-- REFUERZO DE LA PROFESORA CLARA -->
-              <div id="refuerzoBox" class="refuerzo-box hide">
-                <b>👩‍🏫 Refuerzo pedagógico de la Profesora Clara:</b>
-                <p id="refuerzoTexto"></p>
-              </div>
-            </div>
-
-            <!-- LISTA DE PREGUNTAS -->
+            
+            <!-- CONTENEDOR DE LA PREGUNTA ACTUAL -->
             <div id="quizQuestionsList" style="display:flex;flex-direction:column;gap:12px"></div>
-
-            <div id="quizActions" style="display:flex;justify-content:flex-end;gap:10px;margin-top:8px">
-              <button id="btnSubmitQuiz" class="ok" style="font-size:.95rem;padding:11px 20px" onclick="calificarCuestionario()">Enviar y Calificar Cuestionario 📝</button>
-            </div>
+            
           </div>
         </div>
 
@@ -471,9 +437,9 @@ const J={'Content-Type':'application/json'};
 let actx,an,bins,mic,micAn,micSource=null,rec=null;
 const player=$('#player');
 
-// Cuestionario state
+// ESTADO DEL NUEVO CUESTIONARIO (UNO A UNO)
 let quizData=[];
-let quizRespuestas={};
+let qi_quiz=0;
 let quizCalificado=false;
 
 function renderMath(){
@@ -577,8 +543,7 @@ $('#btnGen').onclick=async()=>{
 
 function openLeccion(t){
   modoLibre=false;modoBienestar=false;intentos=0;tema=t;qi=0;hist=[];
-  quizData=[];quizRespuestas={};quizCalificado=false;
-  $('#quizResultBox').classList.add('hide');$('#refuerzoBox').classList.add('hide');
+  quizData=[];qi_quiz=0;quizCalificado=false;
 
   $('#aulaTabs').classList.remove('hide');
   $('#libreHead').classList.add('hide');
@@ -748,7 +713,7 @@ async function answer(txt){
       $('#banner').textContent=`Pregunta ${qi+1} de ${tema.preguntas.length}: ${s.pregunta}`;
       say('bot',t);speak(t);
     } else {
-      const finMsg='¡Excelente trabajo! Has completado el diálogo inicial. Ahora pasaremos al cuestionario de evaluación formativa para ver cuánto aprendiste.';
+      const finMsg='¡Excelente trabajo! Has completado el diálogo inicial. Ahora pasaremos al cuestionario de evaluación continua.';
       $('#banner').textContent='¡Diálogo completado! Pasando al Cuestionario...';
       say('bot',finMsg);
       speak(finMsg,()=>{
@@ -762,16 +727,14 @@ async function answer(txt){
 }
 
 /* =========================================================
-   SISTEMA DE CUESTIONARIO CON PUNTAJE Y REFUERZO ACTIVO
+   NUEVA LÓGICA DE EVALUACIÓN UNO A UNO CON REFUERZO
 ========================================================= */
 
 async function cargarCuestionario(forzar=false){
   if(quizData.length&&!forzar)return;
   const list=$('#quizQuestionsList');
-  list.innerHTML='<div style="text-align:center;padding:24px;color:var(--mute)">✨ Preparando cuestionario de evaluación con Clara...</div>';
-  $('#quizResultBox').classList.add('hide');
-  $('#refuerzoBox').classList.add('hide');
-  quizRespuestas={};
+  list.innerHTML='<div style="text-align:center;padding:24px;color:var(--mute)">✨ Preparando preguntas de evaluación con Clara...</div>';
+  qi_quiz=0;
   quizCalificado=false;
 
   try{
@@ -780,157 +743,138 @@ async function cargarCuestionario(forzar=false){
       body:JSON.stringify({curso_nombre:curso.nombre,tema_titulo:tema.titulo,contenido:tema.contenido})
     });
     quizData=d.preguntas||[];
-    renderQuizQuestions();
+    renderPreguntaActual();
   } catch(e) {
-    list.innerHTML='<div style="text-align:center;padding:20px;color:var(--err)">No se pudo cargar el cuestionario. <button class="sec" onclick="cargarCuestionario(true)">Reintentar</button></div>';
+    list.innerHTML='<div style="text-align:center;padding:20px;color:var(--err)">No se pudo generar el cuestionario. <button class="sec" onclick="cargarCuestionario(true)">Reintentar</button></div>';
   }
 }
 
-function renderQuizQuestions(){
+function renderPreguntaActual(){
   const list=$('#quizQuestionsList');
   list.replaceChildren();
-
-  quizData.forEach((q,qIdx)=>{
-    const card=el('div','q-card');
-    card.id='qCard_'+qIdx;
-
-    const header=el('div','q-title',`${qIdx+1}. ${q.pregunta}`);
-    card.append(header);
-
-    const optsContainer=el('div','q-options');
-    q.opciones.forEach((op,oIdx)=>{
-      const btn=el('button','q-opt');
-      btn.id=`qOpt_${qIdx}_${oIdx}`;
-      const letters=['A','B','C','D'];
-      btn.innerHTML=`<span style="font-weight:700;color:var(--brand);width:20px">${letters[oIdx]})</span> <span>${op}</span>`;
-      
-      btn.onclick=()=>{
-        if(quizCalificado)return;
-        quizRespuestas[qIdx]=oIdx;
-        document.querySelectorAll(`[id^="qOpt_${qIdx}_"]`).forEach(b=>b.classList.remove('selected'));
-        btn.classList.add('selected');
-      };
-
-      optsContainer.append(btn);
-    });
-
-    card.append(optsContainer);
-
-    const fb=el('div','q-feedback hide');
-    fb.id='qFb_'+qIdx;
-    card.append(fb);
-
-    list.append(card);
-  });
-
-  renderMath();
-}
-
-async function calificarCuestionario(){
-  if(!quizData||!quizData.length)return;
-  if(quizCalificado)return;
-
-  // Verificar si respondió todas
-  const total=quizData.length;
-  const respondidas=Object.keys(quizRespuestas).length;
-  if(respondidas<total){
-    alert(`Por favor responde todas las preguntas (${respondidas} de ${total} contestadas).`);
+  
+  // Verificamos si completó todo
+  if(qi_quiz >= quizData.length){
+    list.innerHTML=`
+      <div style="text-align:center;padding:30px;background:var(--ok-bg);border:1px solid var(--ok);border-radius:12px;">
+        <div style="font-size:3.5rem;margin-bottom:10px">🏆</div>
+        <h3 style="color:var(--ok);font-size:1.4rem">¡Misión Cumplida!</h3>
+        <p style="color:var(--ink);margin-top:8px;font-size:1.05rem">Has respondido correctamente todas las preguntas y demostrado tu dominio sobre este tema. ¡Sigue así!</p>
+      </div>`;
+    
+    const finMsg="¡Excelente trabajo! Has respondido todas las preguntas correctamente y dominado este tema. Estoy muy orgullosa de tu progreso.";
+    $('#banner').textContent = "Cuestionario completado satisfactoriamente.";
+    speak(finMsg);
     return;
   }
 
-  quizCalificado=true;
-  let aciertos=0;
-  const errores=[];
+  // Renderizamos la pregunta correspondiente a qi_quiz
+  const q = quizData[qi_quiz];
+  $('#banner').textContent = `Cuestionario: Pregunta ${qi_quiz+1} de ${quizData.length}`;
 
-  quizData.forEach((q,qIdx)=>{
-    const seleccion=quizRespuestas[qIdx];
-    const esCorrecto=(seleccion===q.correcta);
-    const card=$('#qCard_'+qIdx);
-    const fb=$('#qFb_'+qIdx);
-    fb.classList.remove('hide');
+  const card=el('div','q-card');
+  card.id='qCard_actual';
 
-    // Estilos de opciones
-    q.opciones.forEach((_,oIdx)=>{
-      const optBtn=$(`#qOpt_${qIdx}_${oIdx}`);
-      optBtn.disabled=true;
-      if(oIdx===q.correcta){
-        optBtn.classList.add('correct-opt');
-      } else if(oIdx===seleccion&&!esCorrecto){
-        optBtn.classList.add('wrong-opt');
-      }
-    });
+  const header=el('div','q-title',`Pregunta ${qi_quiz+1} de ${quizData.length}: ${q.pregunta}`);
+  card.append(header);
 
-    if(esCorrecto){
-      aciertos++;
-      card.classList.add('is-correct');
-      fb.innerHTML=`<b style="color:var(--ok)">✓ ¡Correcto!</b> ${q.explicacion||''}`;
-    } else {
-      card.classList.add('is-wrong');
-      const letraCorr=['A','B','C','D'][q.correcta];
-      const letraSel=['A','B','C','D'][seleccion];
-      fb.innerHTML=`<b style="color:var(--err)">✗ Respuesta elegida (${letraSel}):</b> La correcta era la <b>${letraCorr}</b>. ${q.explicacion||''}`;
-      errores.push({
-        pregunta:q.pregunta,
-        respuesta_dada:q.opciones[seleccion],
-        respuesta_correcta:q.opciones[q.correcta],
-        concepto:q.concepto||'Tema central',
-        explicacion:q.explicacion
-      });
-    }
+  const optsContainer=el('div','q-options');
+  q.opciones.forEach((op,oIdx)=>{
+    const btn=el('button','q-opt');
+    btn.id=`qOpt_${oIdx}`;
+    const letters=['A','B','C','D'];
+    btn.innerHTML=`<span style="font-weight:700;color:var(--brand);width:20px">${letters[oIdx]})</span> <span>${op}</span>`;
+    
+    btn.onclick=()=>evaluarRespuestaUnica(oIdx);
+    optsContainer.append(btn);
   });
 
-  // Calcular nota sobre 20 (Sistema Minedu Perú)
-  const puntaje=(aciertos/total)*20;
-  $('#scoreValue').textContent=`${puntaje.toFixed(0)}/20`;
-  $('#scoreDetail').textContent=`${aciertos} de ${total} respuestas correctas`;
-  
-  if(puntaje>=18){
-    $('#scoreMsg').textContent='¡Excelente dominio del tema! 🌟';
-  } else if(puntaje>=14){
-    $('#scoreMsg').textContent='¡Buen trabajo! Reforcemos los puntos clave 👍';
-  } else {
-    $('#scoreMsg').textContent='¡Vamos a repasar juntos estos conceptos! 💪';
-  }
+  card.append(optsContainer);
 
-  $('#quizResultBox').classList.remove('hide');
-  $('#quizActions').classList.add('hide');
+  const fb=el('div','q-feedback hide');
+  fb.id='qFb_actual';
+  card.append(fb);
 
-  // Llamar al refuerzo pedagógico de Clara
-  setState('thinking','Clara está analizando tu desempeño…');
-  try{
-    const r=await api('/api/reforzar',{
-      method:'POST',headers:J,
-      body:JSON.stringify({
-        curso_nombre:curso.nombre,
-        tema_titulo:tema.titulo,
-        contenido:tema.contenido,
-        puntaje:puntaje,
-        total_preguntas:total,
-        aciertos:aciertos,
-        errores:errores
-      })
-    });
-
-    if(r.texto_profesora){
-      $('#refuerzoBox').classList.remove('hide');
-      $('#refuerzoTexto').textContent=r.texto_profesora;
-      $('#banner').textContent=`Evaluación: ${puntaje.toFixed(0)}/20. Escuchando refuerzo...`;
-      speak(r.texto_profesora);
-    }
-  } catch(e){
-    setState('idle','Lista');
-  }
-
+  list.append(card);
   renderMath();
 }
 
-function reiniciarQuiz(){
-  quizRespuestas={};
-  quizCalificado=false;
-  $('#quizResultBox').classList.add('hide');
-  $('#refuerzoBox').classList.add('hide');
-  $('#quizActions').classList.remove('hide');
-  renderQuizQuestions();
+async function evaluarRespuestaUnica(seleccion){
+  if(quizCalificado)return;
+  quizCalificado=true; // Bloquear selección mientras se evalúa
+  
+  const q = quizData[qi_quiz];
+  const esCorrecto = (seleccion === q.correcta);
+  
+  const card = $('#qCard_actual');
+  const fb = $('#qFb_actual');
+  fb.classList.remove('hide');
+
+  // Mostrar visualmente lo que marcó el usuario
+  q.opciones.forEach((_,oIdx)=>{
+    const optBtn=$(`#qOpt_${oIdx}`);
+    optBtn.disabled=true;
+    if(oIdx===q.correcta && esCorrecto){
+      optBtn.classList.add('correct-opt');
+    } else if(oIdx===seleccion && !esCorrecto){
+      optBtn.classList.add('wrong-opt');
+    }
+  });
+
+  if(esCorrecto){
+    // Acertó, avanza a la siguiente
+    card.classList.add('is-correct');
+    fb.innerHTML=`<b style="color:var(--ok)">✓ ¡Correcto!</b> ${q.explicacion||''}`;
+    const frasesOk = ["¡Muy bien! Esa es la respuesta correcta.", "¡Excelente! Has acertado.", "¡Perfecto! Vamos a la siguiente pregunta."];
+    const audioMsg = frasesOk[Math.floor(Math.random() * frasesOk.length)];
+    
+    speak(audioMsg, () => {
+        qi_quiz++; // Avanzar índice
+        quizCalificado = false;
+        renderPreguntaActual(); // Renderizar nueva pregunta
+    });
+  } else {
+    // Falló, enviamos al backend para que le enseñe
+    card.classList.add('is-wrong');
+    fb.innerHTML=`<b style="color:var(--err)">✗ Respuesta incorrecta.</b> Clara está preparando la explicación...`;
+    
+    setState('thinking','Clara está analizando el error…');
+    try {
+        const r=await api('/api/explicar-error',{
+          method:'POST',headers:J,
+          body:JSON.stringify({
+            curso_nombre:curso.nombre,
+            tema_titulo:tema.titulo,
+            pregunta:q.pregunta,
+            respuesta_dada:q.opciones[seleccion],
+            respuesta_correcta:q.opciones[q.correcta],
+            explicacion:q.explicacion
+          })
+        });
+        
+        if(r.texto_profesora){
+            fb.innerHTML=`<b style="color:var(--err)">Refuerzo Pedagógico:</b> ${r.texto_profesora}`;
+            // Habla el profesor y luego le permite intentar de nuevo la misma pregunta
+            speak(r.texto_profesora, () => {
+                card.classList.remove('is-wrong');
+                fb.classList.add('hide');
+                // Desbloqueamos botones para nuevo intento
+                q.opciones.forEach((_,oIdx)=>{
+                    const optBtn=$(`#qOpt_${oIdx}`);
+                    optBtn.disabled=false;
+                    optBtn.classList.remove('wrong-opt');
+                });
+                quizCalificado = false;
+                setState('idle','Lista (Inténtalo de nuevo)');
+            });
+        }
+    } catch(e) {
+        fb.innerHTML=`<b style="color:var(--err)">Error de conexión.</b> Vuelve a intentarlo.`;
+        quizCalificado = false;
+        setState('idle','Lista');
+    }
+  }
+  renderMath();
 }
 
 /* =========================================================
@@ -1045,7 +989,7 @@ $('#btnEnv').onclick=enviar;$('#txt').onkeydown=e=>{if(e.key==='Enter')enviar()}
 /* =========================================================
    ANIMACIONES DE AVATAR, BOCA Y EMOCIONES
 ========================================================= */
-const rnd=(a,b)=>a+Math.random()*(b-a),NS='http://www.w3.org/2000/svg';
+const rnd=(a,b)=>a+Math.random()*(b-a),NS='[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)';
 const AV={};['cBody','cBraidL','cBraidR','cArm','cFore','cHand','cHead','irisL','irisR','lidL','lidR','llidL','llidR','lashL','lashR','browL','browR','blushL','blushR','mFill','mIn','mLine','mClipP','mTeeth','mTongue','sparks','headset'].forEach(id=>AV[id]=document.getElementById(id));
 const HEADSET=true;
 AV.headset.style.display=HEADSET?'':'none';
